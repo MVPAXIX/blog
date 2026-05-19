@@ -8,40 +8,49 @@ const LOGO = 'https://framerusercontent.com/assets/lWECWOq0Fn4mo6YfodUyQN2uBc.sv
 const SPARKLE = 'https://framerusercontent.com/assets/Gr828vetCecyI5E5uMHOwGF70c.svg';
 const ARROW = 'https://framerusercontent.com/assets/0cfN7HzjLoESazs4gVW87az7BE.svg';
 
+// These links point to the parent marketing site (globaltize.com/<page>),
+// NOT this blog (globaltize.com/blog/...). Docusaurus' <Link> normally
+// prefixes any path with baseUrl ("/blog/"), so a plain "/pricing" would
+// resolve to "/blog/pricing" and fail the broken-links check. The
+// `pathname://` prefix tells Docusaurus to render the href as-is.
+const MAIN = (p) => `pathname://${p}`;
+
 const NAV_LINKS = [
     {
         label: 'How It Works',
         dropdown: true,
         items: [
-            { label: 'International Recruitment', href: '/recruitment' },
-            { label: 'US & Canada Recruitment', href: '/recruitment-united-states-canada' },
-            { label: 'Contractor Payments & EOR', href: '/contractor-payments-and-eor' },
+            { label: 'International Recruitment', href: MAIN('/recruitment') },
+            { label: 'US & Canada Recruitment', href: MAIN('/recruitment-united-states-canada') },
+            { label: 'Contractor Payments & EOR', href: MAIN('/contractor-payments-and-eor') },
         ],
     },
     {
         label: 'Regions',
         dropdown: true,
         items: [
-            { label: 'Southeast Asia', href: '/regions-guide/southeast-asia' },
-            { label: 'Latin America', href: '/regions-guide/latin-america' },
-            { label: 'South Africa', href: '/regions-guide/south-africa' },
-            { label: 'US & Canada', href: '/regions-guide/us-canada' },
+            { label: 'Southeast Asia', href: MAIN('/regions-guide/southeast-asia') },
+            { label: 'Latin America', href: MAIN('/regions-guide/latin-america') },
+            { label: 'South Africa', href: MAIN('/regions-guide/south-africa') },
+            { label: 'US & Canada', href: MAIN('/regions-guide/us-canada') },
         ],
     },
-    { label: 'Testimonials', href: '/testimonials' },
+    { label: 'Testimonials', href: MAIN('/testimonials') },
     {
         label: 'Resources',
         dropdown: true,
         items: [
-            { label: 'Blog', href: '/blog' },
-            { label: 'Popular Roles', href: '/popular-roles' },
-            { label: 'Industries', href: '/industries' },
-            { label: 'Payroll Calculator', href: '/payroll-calculator' },
-            { label: 'Refer & Earn', href: '/refer-and-earn' },
-            { label: 'Compare Globaltize', href: '/competitor-comparison' },
+            // The blog IS this site — link to blog home, which baseUrl already
+            // resolves to /blog/.
+            { label: 'Blog', href: '/' },
+            { label: 'Popular Roles', href: MAIN('/popular-roles') },
+            { label: 'Industries', href: MAIN('/industries') },
+            { label: 'Payroll Calculator', href: MAIN('/payroll-calculator') },
+            { label: 'Refer & Earn', href: MAIN('/refer-and-earn') },
+            { label: 'Compare Globaltize', href: MAIN('/competitor-comparison') },
         ],
     },
-    { label: 'Pricing', href: '/pricing' },
+    { label: 'Pricing', href: MAIN('/pricing') },
 ];
 
 function Caret({ className }) {
@@ -155,7 +164,7 @@ export default function Navbar() {
                 </div>
 
                 <div className={styles.ctas}>
-                    <Link to="/careers" className={styles.findJob}>
+                    <Link to="pathname:///careers" className={styles.findJob}>
                         FIND A JOB
                         <FindJobArrow />
                     </Link>
@@ -221,7 +230,7 @@ export default function Navbar() {
                         )
                     )}
                     <div className={styles.mobileCtas}>
-                        <Link to="/careers" className={styles.findJob}>
+                        <Link to="pathname:///careers" className={styles.findJob}>
                             FIND A JOB
                             <FindJobArrow />
                         </Link>

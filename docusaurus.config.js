@@ -60,17 +60,17 @@ const config = {
         },
         items: [
           {
-            href: '/recruitment',
+            href: 'pathname:///recruitment',
             label: 'How It Works',
             position: 'right',
           },
           {
-            href: '/pricing',
+            href: 'pathname:///pricing',
             label: 'Pricing',
             position: 'right',
           },
           {
-            href: '/',
+            href: 'pathname:///',
             label: 'Home',
             position: 'right',
           },
@@ -90,23 +90,23 @@ const config = {
           {
             title: 'Product',
             items: [
-              { label: 'International Recruitment', href: '/recruitment' },
-              { label: 'Pricing', href: '/pricing' },
-              { label: 'Comparison', href: '/competitor-comparison' },
+              { label: 'International Recruitment', href: 'pathname:///recruitment' },
+              { label: 'Pricing', href: 'pathname:///pricing' },
+              { label: 'Comparison', href: 'pathname:///competitor-comparison' },
             ],
           },
           {
             title: 'Resources',
             items: [
-              { label: 'Blog', href: '/blog' },
-              { label: 'Payroll Calculator', href: '/payroll-calculator' },
+              { label: 'Blog', href: '/' },
+              { label: 'Payroll Calculator', href: 'pathname:///payroll-calculator' },
             ],
           },
           {
             title: 'Legal',
             items: [
-              { label: 'Terms of Service', href: '/terms' },
-              { label: 'Privacy Policy', href: '/privacy' },
+              { label: 'Terms of Service', href: 'pathname:///terms-and-conditions' },
+              { label: 'Privacy Policy', href: 'pathname:///privacy-policy' },
             ],
           },
         ],

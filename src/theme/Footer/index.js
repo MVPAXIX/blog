@@ -13,29 +13,37 @@ const SOCIAL_LINKEDIN = 'https://framerusercontent.com/assets/vPIACnb09ujqJ0KsGt
 const SOCIAL_FACEBOOK = 'https://framerusercontent.com/assets/wBqNfzU558UwoMjlWvU21NXc5c.svg';
 const BG_LOGO = 'https://framerusercontent.com/assets/B1DBfTYW9BvQj1xc6AVsuOZsYlw.svg';
 
+// All non-blog routes live on the parent marketing site at
+// globaltize.com/<page>. The blog itself is at globaltize.com/blog/...,
+// so Docusaurus' baseUrl prefix would mangle these into /blog/<page> and
+// trip the broken-links check at build. `pathname://` tells Docusaurus
+// to render the href without applying baseUrl.
+const MAIN = (p) => `pathname://${p}`;
+
 const QUICK_LINKS = [
-    { label: 'Home', href: '/' },
-    { label: 'International Recruitment', href: '/recruitment' },
-    { label: 'United States Recruitment', href: '/recruitment-united-states-canada' },
-    { label: 'Contractor Payments & EOR', href: '/contractor-payments-and-eor' },
-    { label: 'Regions Guide', href: '/regions-guide' },
-    { label: 'Testimonials', href: '/testimonials' },
-    { label: 'Pricing', href: '/pricing' },
+    { label: 'Home', href: MAIN('/') },
+    { label: 'International Recruitment', href: MAIN('/recruitment') },
+    { label: 'United States Recruitment', href: MAIN('/recruitment-united-states-canada') },
+    { label: 'Contractor Payments & EOR', href: MAIN('/contractor-payments-and-eor') },
+    { label: 'Regions Guide', href: MAIN('/regions-guide') },
+    { label: 'Testimonials', href: MAIN('/testimonials') },
+    { label: 'Pricing', href: MAIN('/pricing') },
 ];
 
 const RESOURCES = [
-    { label: 'Refer & Earn', href: '/refer-and-earn' },
-    { label: 'Popular Roles', href: '/popular-roles' },
-    { label: 'Industries', href: '/industries' },
-    { label: 'Savings Calculator', href: '/payroll-calculator' },
-    { label: 'Compare Globaltize', href: '/competitor-comparison' },
+    { label: 'Refer & Earn', href: MAIN('/refer-and-earn') },
+    { label: 'Popular Roles', href: MAIN('/popular-roles') },
+    { label: 'Industries', href: MAIN('/industries') },
+    { label: 'Savings Calculator', href: MAIN('/payroll-calculator') },
+    { label: 'Compare Globaltize', href: MAIN('/competitor-comparison') },
     { label: 'Youtube Content', href: 'https://www.youtube.com/@Globaltize', external: true },
-    { label: 'Blogs', href: '/blog' },
+    // Blog IS this site — link to blog home via baseUrl.
+    { label: 'Blogs', href: '/' },
 ];
 
 const JOIN_TEAM = [
-    { label: 'Careers', href: '/careers' },
-    { label: 'Past Hires Wall of Love', href: '/careers/candidate-wall-of-love' },
+    { label: 'Careers', href: MAIN('/careers') },
+    { label: 'Past Hires Wall of Love', href: MAIN('/careers/candidate-wall-of-love') },
 ];
 
 function FooterLink({ link }) {
@@ -114,14 +122,14 @@ export default function Footer() {
                 <div className={styles.content}>
                     <div className={styles.grid}>
                         <div className={styles.brand}>
-                            <Link to="/" className={styles.logoLink}>
+                            <Link to="pathname:///" className={styles.logoLink}>
                                 <SvgMask src="https://framerusercontent.com/assets/xN9LJ3uE95HphIib71XA6fAcus.svg" color="var(--color-white)" className={styles.logoImg} />
                             </Link>
                             <p className={styles.tagline}>
                                 Your Complete Solution to Recruit, Hire, &amp; Pay Remote Employees
                                 Anywhere in the World.
                             </p>
-                            <Link to="/refer-and-earn" className={styles.referralBtn}>
+                            <Link to="pathname:///refer-and-earn" className={styles.referralBtn}>
                                 <SvgMask src="https://framerusercontent.com/assets/MSgWu9DJWNviZTUCfcHdjzuqFM.svg" color="var(--color-gold)" className={styles.referralIcon} />
                                 <span>Referral Program</span>
                                 <SvgMask src="https://framerusercontent.com/assets/ZNPDZXdtBubJf1jU8z1j2HJKnI.svg" color="var(--color-gold)" className={styles.referralIcon} />
@@ -205,11 +213,11 @@ export default function Footer() {
                     <div className={styles.bottom}>
                         <p className={styles.copyright}>&copy; Copyright 2026. Globaltize.</p>
                         <div className={styles.legalRow}>
-                            <Link to="/terms-and-conditions">Terms &amp; Conditions</Link>
+                            <Link to="pathname:///terms-and-conditions">Terms &amp; Conditions</Link>
                             <span className={styles.legalDot} aria-hidden="true" />
-                            <Link to="/privacy-policy">Privacy Policy</Link>
+                            <Link to="pathname:///privacy-policy">Privacy Policy</Link>
                             <span className={styles.legalDot} aria-hidden="true" />
-                            <Link to="/ai-and-llm-info">AI and LLM Info</Link>
+                            <Link to="pathname:///ai-and-llm-info">AI and LLM Info</Link>
                         </div>
                     </div>
                 </div>
