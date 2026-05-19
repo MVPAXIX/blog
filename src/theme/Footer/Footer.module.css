@@ -1,0 +1,285 @@
+/* Ported verbatim from Next.js project */
+.wrapper {
+    width: 100%;
+    background-color: transparent;
+    /* Remove potential leak color */
+    position: relative;
+    padding-bottom: 0;
+    margin-top: -1px;
+    /* Overlap slightly with content above to prevent literal pixel leaks */
+}
+
+.topCurve {
+    width: 100%;
+    aspect-ratio: calc(6048 / 772);
+    display: block;
+    border: none;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: -2px;
+    /* Pull footer up to meet the curve and prevent gaps */
+}
+
+.topCurve img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+}
+
+.footer {
+    background-color: var(--color-dark-accent);
+    color: var(--color-white);
+    position: relative;
+    overflow: hidden;
+    padding: 80px 80px 0;
+    z-index: 1;
+    margin-top: 0;
+}
+
+.content {
+    width: 100%;
+    max-width: 1432px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr 1.2fr;
+    gap: 60px;
+    padding-bottom: 60px;
+}
+
+.brand {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.logoLink {
+    display: inline-block;
+}
+
+.logoImg {
+    width: 182px;
+    height: 49px;
+    display: block;
+    object-fit: contain;
+    object-position: left center;
+}
+
+.tagline {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 22px;
+    color: var(--color-highlight);
+    margin: 0;
+}
+
+.referralBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background-color: transparent;
+    border: 1px solid var(--color-gold);
+    border-radius: 16px;
+    color: var(--color-gold);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    text-decoration: none;
+    align-self: flex-start;
+    transition: background-color 0.15s ease;
+}
+
+.referralBtn:hover {
+    background-color: rgba(255, 205, 104, 0.1);
+}
+
+.referralIcon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    display: block;
+    object-fit: contain;
+}
+
+.socials {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.socialLink {
+    opacity: 0.7;
+    transition: opacity 0.15s ease;
+    display: inline-block;
+}
+
+.socialLink:hover {
+    opacity: 1;
+}
+
+.socialIcon {
+    height: 34px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+}
+
+.socialIconYoutube {
+    height: 34px;
+    width: 48px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.columnTitle {
+    font-family: "Degular Display Semibold", sans-serif;
+    font-size: 18px;
+    line-height: 24px;
+    color: var(--color-white);
+    font-weight: 400;
+    margin: 0 0 6px 0;
+}
+
+.footerLink {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--color-highlight);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.footerLink:hover {
+    color: var(--color-white);
+}
+
+.contactRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--color-highlight);
+    text-decoration: none;
+}
+
+.contactRow:hover {
+    color: var(--color-white);
+}
+
+.contactIcon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--color-highlight);
+}
+
+.divider {
+    width: 100%;
+    height: 1px;
+    background-color: rgba(176, 213, 221, 0.3);
+    margin: 0;
+}
+
+.bottom {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 24px 0 32px;
+    position: relative;
+    z-index: 3;
+}
+
+.legalRow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.copyright,
+.legalRow a {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 20px;
+    color: rgb(143, 189, 195);
+    text-decoration: none;
+    margin: 0;
+}
+
+.legalDot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: rgb(143, 189, 195);
+    opacity: 0.4;
+}
+
+.legalRow a:hover {
+    color: var(--color-white);
+}
+
+.bgLogo {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1432px;
+    height: auto;
+    opacity: 0.18;
+    pointer-events: none;
+    z-index: 1;
+    display: block;
+}
+
+@media (max-width: 1199px) {
+    .footer {
+        padding: 60px 50px 0;
+    }
+
+    .grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 40px 32px;
+    }
+
+    .brand {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 809px) {
+    .footer {
+        padding: 40px 20px 0;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding-bottom: 32px;
+    }
+
+    .bottom {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

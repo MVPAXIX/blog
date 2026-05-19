@@ -1,0 +1,94 @@
+ethiopia:
+  label: Ethiopia
+  permalink: /ethiopia
+  description: Travel guides and cultural insights about Ethiopia
+
+mursi:
+  label: Mursi Tribe
+  permalink: /mursi-tribe
+  description: Articles about the Mursi tribe and their culture
+
+culture:
+  label: Culture
+  permalink: /culture
+  description: Cultural experiences and traditions around the world
+
+omo-valley:
+  label: Omo Valley
+  permalink: /omo-valley
+  description: Exploration of Ethiopia's Omo Valley tribes and landscapes
+
+tribes:
+  label: Tribes
+  permalink: /tribes
+  description: Indigenous tribes and their traditional ways of life
+
+semien-mountains:
+  label: Semien Mountains
+  permalink: /semien-mountains
+  description: Hiking and wildlife in Ethiopia's Semien Mountains
+
+hiking:
+  label: Hiking
+  permalink: /hiking
+  description: Hiking trails and outdoor adventures
+
+wildlife:
+  label: Wildlife
+  permalink: /wildlife
+  description: Wildlife viewing and conservation
+
+unesco:
+  label: UNESCO
+  permalink: /unesco
+  description: UNESCO World Heritage Sites around the world
+
+simien:
+  label: Simien
+  permalink: /simien
+  description: The Simien Mountains National Park
+
+southern-ethiopia:
+  label: Southern Ethiopia
+  permalink: /southern-ethiopia
+  description: Travel in southern Ethiopia and the Omo Valley
+
+northern-ethiopia:
+  label: Northern Ethiopia
+  permalink: /northern-ethiopia
+  description: Historical sites and cultural heritage of northern Ethiopia
+
+road-trip:
+  label: Road Trip
+  permalink: /road-trip
+  description: Road trip adventures and overland travel
+
+adventure:
+  label: Adventure
+  permalink: /adventure
+  description: Adventure travel and outdoor activities
+
+historical-sites:
+  label: Historical Sites
+  permalink: /historical-sites
+  description: Ancient ruins, castles, and historical landmarks
+
+lalibela:
+  label: Lalibela
+  permalink: /lalibela
+  description: The rock-hewn churches of Lalibela
+
+gondar:
+  label: Gondar
+  permalink: /gondar
+  description: Castles and heritage sites of Gondar
+
+aksum:
+  label: Aksum
+  permalink: /aksum
+  description: Ancient obelisks and archaeological sites of Aksum
+
+travel-guide:
+  label: Travel Guide
+  permalink: /travel-guide
+  description: Comprehensive travel guides and destination information

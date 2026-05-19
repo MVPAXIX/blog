@@ -1,0 +1,91 @@
+/* ===== GLOBALTIZE DESIGN SYSTEM — Verbatim Framer Tokens ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cabin:wght@400;500;600;700&display=swap');
+
+@font-face {
+  font-family: "Degular Display Semibold";
+  src: url("https://framerusercontent.com/assets/yR7QD7izlZWNOjhULe1IrBOj0.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 600;
+}
+
+:root {
+  --ifm-color-primary: #004049;
+  --ifm-color-primary-dark: #003a42;
+  --ifm-color-primary-darker: #00363e;
+  --ifm-color-primary-darkest: #002d33;
+  --ifm-color-primary-light: #004650;
+  --ifm-color-primary-lighter: #004953;
+  --ifm-color-primary-lightest: #00535f;
+
+  /* Globaltize Colors */
+  --color-bg: #f0f6f7;
+  --color-primary: #004049;
+  --color-secondary: #006068;
+  --color-accent: #00616f;
+  --color-dark-accent: #01444f;
+  --color-highlight: #b0d5dd;
+  --color-gold: #ffcd68;
+  --color-white: #ffffff;
+  --color-text-dark: #191919;
+  --color-text-body: #1a1a1a;
+  --color-text-muted: #4c4c4c;
+  --color-text-light: #959595;
+  --color-cyan: #208c9c;
+  --color-mid-teal: #005461;
+  --color-near-black: #111111;
+
+  /* Fonts */
+  --font-heading: "Degular Display Semibold", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-nav: "Cabin", sans-serif;
+
+  /* Shadows */
+  --shadow-card: 0px 2px 18px 0px rgba(0, 64, 73, 0.15);
+  --shadow-card-hover: 0px 2px 18px 0px rgba(0, 64, 73, 0.15), 0px 8px 20px 0px rgba(0, 64, 73, 0.1);
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Texture overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url(https://framerusercontent.com/assets/6mcf62RlDfRfU61Yg5vb2pefpi4.png);
+  background-repeat: repeat;
+  background-size: 271.5px auto;
+  opacity: 0.04;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* body texture overlay and design tokens applied above */
+
+.main-wrapper {
+  padding-top: 120px;
+}
+
+@media (max-width: 899px) {
+  .main-wrapper {
+    padding-top: 100px;
+  }
+}
+
+/* Fix Docusaurus footer container conflicts */
+.footer {
+  padding: 0 !important;
+  /* Let our component handle internal padding */
+  background-color: transparent !important;
+  /* Handled by our inner .footer */
+}
+
+/* Ensure the main container doesn't clip the wave */
+#__docusaurus_skipToContent_fallback {
+  overflow: visible !important;
+}
