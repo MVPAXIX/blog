@@ -15,7 +15,11 @@ const config = {
   },
 
   url: 'https://www.globaltize.com',
-  baseUrl: '/blog/',
+  // baseUrl is `/` so assets load wherever the build is deployed (Vercel
+  // serves at the root). When/if we route this blog under
+  // globaltize.com/blog via a rewrite on the main site, change baseUrl
+  // back to '/blog/' and also adjust MAIN() in src/theme/{Navbar,Footer}.
+  baseUrl: '/',
 
   onBrokenLinks: 'throw',
 
@@ -60,17 +64,17 @@ const config = {
         },
         items: [
           {
-            href: 'pathname:///recruitment',
+            href: 'https://www.globaltize.com/recruitment',
             label: 'How It Works',
             position: 'right',
           },
           {
-            href: 'pathname:///pricing',
+            href: 'https://www.globaltize.com/pricing',
             label: 'Pricing',
             position: 'right',
           },
           {
-            href: 'pathname:///',
+            href: 'https://www.globaltize.com/',
             label: 'Home',
             position: 'right',
           },
@@ -90,23 +94,23 @@ const config = {
           {
             title: 'Product',
             items: [
-              { label: 'International Recruitment', href: 'pathname:///recruitment' },
-              { label: 'Pricing', href: 'pathname:///pricing' },
-              { label: 'Comparison', href: 'pathname:///competitor-comparison' },
+              { label: 'International Recruitment', href: 'https://www.globaltize.com/recruitment' },
+              { label: 'Pricing', href: 'https://www.globaltize.com/pricing' },
+              { label: 'Comparison', href: 'https://www.globaltize.com/competitor-comparison' },
             ],
           },
           {
             title: 'Resources',
             items: [
               { label: 'Blog', href: '/' },
-              { label: 'Payroll Calculator', href: 'pathname:///payroll-calculator' },
+              { label: 'Payroll Calculator', href: 'https://www.globaltize.com/payroll-calculator' },
             ],
           },
           {
             title: 'Legal',
             items: [
-              { label: 'Terms of Service', href: 'pathname:///terms-and-conditions' },
-              { label: 'Privacy Policy', href: 'pathname:///privacy-policy' },
+              { label: 'Terms of Service', href: 'https://www.globaltize.com/terms-and-conditions' },
+              { label: 'Privacy Policy', href: 'https://www.globaltize.com/privacy-policy' },
             ],
           },
         ],

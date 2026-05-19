@@ -14,11 +14,9 @@ const SOCIAL_FACEBOOK = 'https://framerusercontent.com/assets/wBqNfzU558UwoMjlWv
 const BG_LOGO = 'https://framerusercontent.com/assets/B1DBfTYW9BvQj1xc6AVsuOZsYlw.svg';
 
 // All non-blog routes live on the parent marketing site at
-// globaltize.com/<page>. The blog itself is at globaltize.com/blog/...,
-// so Docusaurus' baseUrl prefix would mangle these into /blog/<page> and
-// trip the broken-links check at build. `pathname://` tells Docusaurus
-// to render the href without applying baseUrl.
-const MAIN = (p) => `pathname://${p}`;
+// globaltize.com/<page>. The blog deploys at a different origin, so we
+// use absolute URLs regardless of baseUrl / hosting topology.
+const MAIN = (p) => `https://www.globaltize.com${p}`;
 
 const QUICK_LINKS = [
     { label: 'Home', href: MAIN('/') },
@@ -122,14 +120,14 @@ export default function Footer() {
                 <div className={styles.content}>
                     <div className={styles.grid}>
                         <div className={styles.brand}>
-                            <Link to="pathname:///" className={styles.logoLink}>
+                            <Link to="https://www.globaltize.com/" className={styles.logoLink}>
                                 <SvgMask src="https://framerusercontent.com/assets/xN9LJ3uE95HphIib71XA6fAcus.svg" color="var(--color-white)" className={styles.logoImg} />
                             </Link>
                             <p className={styles.tagline}>
                                 Your Complete Solution to Recruit, Hire, &amp; Pay Remote Employees
                                 Anywhere in the World.
                             </p>
-                            <Link to="pathname:///refer-and-earn" className={styles.referralBtn}>
+                            <Link to="https://www.globaltize.com/refer-and-earn" className={styles.referralBtn}>
                                 <SvgMask src="https://framerusercontent.com/assets/MSgWu9DJWNviZTUCfcHdjzuqFM.svg" color="var(--color-gold)" className={styles.referralIcon} />
                                 <span>Referral Program</span>
                                 <SvgMask src="https://framerusercontent.com/assets/ZNPDZXdtBubJf1jU8z1j2HJKnI.svg" color="var(--color-gold)" className={styles.referralIcon} />
@@ -213,11 +211,11 @@ export default function Footer() {
                     <div className={styles.bottom}>
                         <p className={styles.copyright}>&copy; Copyright 2026. Globaltize.</p>
                         <div className={styles.legalRow}>
-                            <Link to="pathname:///terms-and-conditions">Terms &amp; Conditions</Link>
+                            <Link to="https://www.globaltize.com/terms-and-conditions">Terms &amp; Conditions</Link>
                             <span className={styles.legalDot} aria-hidden="true" />
-                            <Link to="pathname:///privacy-policy">Privacy Policy</Link>
+                            <Link to="https://www.globaltize.com/privacy-policy">Privacy Policy</Link>
                             <span className={styles.legalDot} aria-hidden="true" />
-                            <Link to="pathname:///ai-and-llm-info">AI and LLM Info</Link>
+                            <Link to="https://www.globaltize.com/ai-and-llm-info">AI and LLM Info</Link>
                         </div>
                     </div>
                 </div>

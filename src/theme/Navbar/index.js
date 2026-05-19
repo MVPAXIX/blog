@@ -9,11 +9,10 @@ const SPARKLE = 'https://framerusercontent.com/assets/Gr828vetCecyI5E5uMHOwGF70c
 const ARROW = 'https://framerusercontent.com/assets/0cfN7HzjLoESazs4gVW87az7BE.svg';
 
 // These links point to the parent marketing site (globaltize.com/<page>),
-// NOT this blog (globaltize.com/blog/...). Docusaurus' <Link> normally
-// prefixes any path with baseUrl ("/blog/"), so a plain "/pricing" would
-// resolve to "/blog/pricing" and fail the broken-links check. The
-// `pathname://` prefix tells Docusaurus to render the href as-is.
-const MAIN = (p) => `pathname://${p}`;
+// NOT this blog. The blog deploys at a different origin than the main
+// site, so absolute URLs are the only thing that works regardless of
+// baseUrl or deployment topology.
+const MAIN = (p) => `https://www.globaltize.com${p}`;
 
 const NAV_LINKS = [
     {
@@ -164,7 +163,7 @@ export default function Navbar() {
                 </div>
 
                 <div className={styles.ctas}>
-                    <Link to="pathname:///careers" className={styles.findJob}>
+                    <Link to="https://www.globaltize.com/careers" className={styles.findJob}>
                         FIND A JOB
                         <FindJobArrow />
                     </Link>
@@ -230,7 +229,7 @@ export default function Navbar() {
                         )
                     )}
                     <div className={styles.mobileCtas}>
-                        <Link to="pathname:///careers" className={styles.findJob}>
+                        <Link to="https://www.globaltize.com/careers" className={styles.findJob}>
                             FIND A JOB
                             <FindJobArrow />
                         </Link>
