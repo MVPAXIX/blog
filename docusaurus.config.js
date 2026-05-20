@@ -15,11 +15,16 @@ const config = {
   },
 
   url: 'https://www.globaltize.com',
-  // baseUrl is `/` so assets load wherever the build is deployed (Vercel
-  // serves at the root). When/if we route this blog under
-  // globaltize.com/blog via a rewrite on the main site, change baseUrl
-  // back to '/blog/' and also adjust MAIN() in src/theme/{Navbar,Footer}.
-  baseUrl: '/',
+  // The blog is mounted under /blog on the main marketing site via a
+  // Vercel rewrite (next.config.js on globaltize-next proxies
+  // /blog/:path* to this blog's Vercel deployment). baseUrl MUST match
+  // that prefix so the generated HTML references /blog/assets/*.css,
+  // which the rewrite then resolves correctly.
+  //
+  // Side effect: the blog's own Vercel preview URL now serves at
+  // <vercel-url>/blog/, not the root. If you want the root to also
+  // work, add a redirect / -> /blog in this project's vercel.json.
+  baseUrl: '/blog/',
 
   onBrokenLinks: 'throw',
 
