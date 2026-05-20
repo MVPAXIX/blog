@@ -80,9 +80,9 @@ body::after {
 /* Fix Docusaurus footer container conflicts */
 .footer {
   padding: 0 !important;
-  /* Let our component handle internal padding */
   background-color: transparent !important;
-  /* Handled by our inner .footer */
+  border: none !important;
+  box-shadow: none !important;
 }
 
 /* Ensure the main container doesn't clip the wave */

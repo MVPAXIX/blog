@@ -106,7 +106,7 @@ export default function Footer() {
     };
 
     return (
-        <div className={styles.wrapper}>
+        <div className={`${styles.wrapper} footer`}>
             <button
                 type="button"
                 className={styles.topCurve}

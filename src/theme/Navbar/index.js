@@ -115,7 +115,7 @@ export default function Navbar() {
 
     return (
         <header className={styles.header}>
-            <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
+            <nav className={`${styles.nav} navbar ${scrolled ? styles.scrolled : ''}`}>
                 <Link to="/" className={styles.logo} aria-label="Globaltize home">
                     <img src={`${LOGO}?width=157&height=28`} alt="Globaltize" />
                 </Link>
