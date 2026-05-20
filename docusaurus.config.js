@@ -14,6 +14,7 @@ const config = {
     v4: true,
   },
 
+  url: 'https://www.globaltize.com',
   // baseUrl MUST be /blog/ so that Docusaurus generates internal links
   // with the prefix, but the Next.js proxy will strip this prefix
   // when fetching from the blog deployment's root.
