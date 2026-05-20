@@ -3,13 +3,10 @@
         {
             "source": "/blog/:path*",
             "destination": "/:path*"
-        }
-    ],
-    "redirects": [
+        },
         {
-            "source": "/",
-            "destination": "/blog/",
-            "permanent": false
+            "source": "/blog/",
+            "destination": "/index.html"
         }
     ]
 }
