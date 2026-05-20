@@ -19,6 +19,7 @@ const config = {
   // with the prefix, but the Next.js proxy will strip this prefix
   // when fetching from the blog deployment's root.
   baseUrl: '/blog/',
+  trailingSlash: true,
 
   onBrokenLinks: 'throw',
 
