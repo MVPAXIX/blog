@@ -14,16 +14,9 @@ const config = {
     v4: true,
   },
 
-  url: 'https://www.globaltize.com',
-  // The blog is mounted under /blog on the main marketing site via a
-  // Vercel rewrite (next.config.js on globaltize-next proxies
-  // /blog/:path* to this blog's Vercel deployment). baseUrl MUST match
-  // that prefix so the generated HTML references /blog/assets/*.css,
-  // which the rewrite then resolves correctly.
-  //
-  // Side effect: the blog's own Vercel preview URL now serves at
-  // <vercel-url>/blog/, not the root. If you want the root to also
-  // work, add a redirect / -> /blog in this project's vercel.json.
+  // baseUrl MUST be /blog/ so that Docusaurus generates internal links
+  // with the prefix, but the Next.js proxy will strip this prefix
+  // when fetching from the blog deployment's root.
   baseUrl: '/blog/',
 
   onBrokenLinks: 'throw',
