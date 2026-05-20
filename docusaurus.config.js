@@ -9,6 +9,7 @@ const config = {
   title: 'Globaltize Blog',
   tagline: 'Hire Top 1% Remote Employees Worldwide',
   favicon: 'https://framerusercontent.com/assets/zaEAI5CGIu5xOSut3Ea5t5HE.png',
+  outDir: 'build/blog',
 
   future: {
     v4: true,
