@@ -3,20 +3,11 @@ import Link from '@docusaurus/Link';
 import styles from './Footer.module.css';
 import { SvgMask } from '../../components/SvgMask';
 
-const FOOTER_LOGO = 'https://framerusercontent.com/assets/xN9LJ3uE95HphIib71XA6fAcus.svg';
+const FOOTER_LOGO = '/img/zemenay-logo.png';
 const TOP_CURVE = 'https://framerusercontent.com/assets/8OubjvrkfmdSPi47CUoAjCIb8.png';
-const REFERRAL_GIFT = 'https://framerusercontent.com/assets/MSgWu9DJWNviZTUCfcHdjzuqFM.svg';
-const REFERRAL_ARROW = 'https://framerusercontent.com/assets/ZNPDZXdtBubJf1jU8z1j2HJKnI.svg';
-const SOCIAL_YOUTUBE = 'https://framerusercontent.com/assets/ZptX4pGvodtrodUYPQhTacTkllc.svg';
-const SOCIAL_INSTAGRAM = 'https://framerusercontent.com/assets/kpXkm0lM5V7RsGzBNWphhqXdKKM.svg';
-const SOCIAL_LINKEDIN = 'https://framerusercontent.com/assets/vPIACnb09ujqJ0KsGtvhpVKC6Y.svg';
-const SOCIAL_FACEBOOK = 'https://framerusercontent.com/assets/wBqNfzU558UwoMjlWvU21NXc5c.svg';
-const BG_LOGO = 'https://framerusercontent.com/assets/B1DBfTYW9BvQj1xc6AVsuOZsYlw.svg';
 
-// All non-blog routes live on the parent marketing site at
-// globaltize.com/<page>. The blog deploys at a different origin, so we
-// use absolute URLs regardless of baseUrl / hosting topology.
-const MAIN = (p) => `https://www.globaltize.com${p}`;
+// Marketing site lives at zemenay.com.
+const MAIN = (p) => `https://www.zemenay.com${p}`;
 
 const QUICK_LINKS = [
     { label: 'Home', href: MAIN('/') },
@@ -33,9 +24,8 @@ const RESOURCES = [
     { label: 'Popular Roles', href: MAIN('/popular-roles') },
     { label: 'Industries', href: MAIN('/industries') },
     { label: 'Savings Calculator', href: MAIN('/payroll-calculator') },
-    { label: 'Compare Globaltize', href: MAIN('/competitor-comparison') },
-    { label: 'Youtube Content', href: 'https://www.youtube.com/@Globaltize', external: true },
-    // Blog IS this site — link to blog home via baseUrl.
+    { label: 'Compare Zemenay', href: MAIN('/competitor-comparison') },
+    { label: 'Youtube Content', href: 'https://www.youtube.com/@Zemenay', external: true },
     { label: 'Blogs', href: '/' },
 ];
 
@@ -120,21 +110,21 @@ export default function Footer() {
                 <div className={styles.content}>
                     <div className={styles.grid}>
                         <div className={styles.brand}>
-                            <Link to="https://www.globaltize.com/" className={styles.logoLink}>
-                                <SvgMask src="https://framerusercontent.com/assets/xN9LJ3uE95HphIib71XA6fAcus.svg" color="var(--color-white)" className={styles.logoImg} />
+                            <Link to={MAIN('/')} className={`${styles.logoLink} ${styles.logo}`}>
+                                <img src={FOOTER_LOGO} alt="Zemenay" className={styles.logoImg} />
                             </Link>
                             <p className={styles.tagline}>
                                 Your Complete Solution to Recruit, Hire, &amp; Pay Remote Employees
                                 Anywhere in the World.
                             </p>
-                            <Link to="https://www.globaltize.com/refer-and-earn" className={styles.referralBtn}>
+                            <Link to={MAIN('/refer-and-earn')} className={styles.referralBtn}>
                                 <SvgMask src="https://framerusercontent.com/assets/MSgWu9DJWNviZTUCfcHdjzuqFM.svg" color="var(--color-gold)" className={styles.referralIcon} />
                                 <span>Referral Program</span>
                                 <SvgMask src="https://framerusercontent.com/assets/ZNPDZXdtBubJf1jU8z1j2HJKnI.svg" color="var(--color-gold)" className={styles.referralIcon} />
                             </Link>
                             <div className={styles.socials}>
                                 <a
-                                    href="https://www.youtube.com/@Globaltize"
+                                    href="https://www.youtube.com/@Zemenay"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label="YouTube"
@@ -143,7 +133,7 @@ export default function Footer() {
                                     <SvgMask src="https://framerusercontent.com/assets/ZptX4pGvodtrodUYPQhTacTkllc.svg" color="var(--color-white)" className={`${styles.socialIcon} ${styles.socialIconYoutube}`} />
                                 </a>
                                 <a
-                                    href="https://www.instagram.com/globaltize/"
+                                    href="https://www.instagram.com/zemenay/"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label="Instagram"
@@ -152,7 +142,7 @@ export default function Footer() {
                                     <SvgMask src="https://framerusercontent.com/assets/kpXkm0lM5V7RsGzBNWphhqXdKKM.svg" color="var(--color-white)" className={styles.socialIcon} />
                                 </a>
                                 <a
-                                    href="https://www.linkedin.com/company/globaltize/"
+                                    href="https://www.linkedin.com/company/zemenay/"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label="LinkedIn"
@@ -161,7 +151,7 @@ export default function Footer() {
                                     <SvgMask src="https://framerusercontent.com/assets/vPIACnb09ujqJ0KsGtvhpVKC6Y.svg" color="var(--color-white)" className={styles.socialIcon} />
                                 </a>
                                 <a
-                                    href="https://www.facebook.com/p/Globaltize-61560837877574/"
+                                    href="https://www.facebook.com/p/Zemenay-61560837877574/"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label="Facebook"
@@ -195,9 +185,9 @@ export default function Footer() {
 
                         <div className={styles.column}>
                             <h4 className={styles.columnTitle}>Get In Touch</h4>
-                            <a href="mailto:info@globaltize.com" className={styles.contactRow}>
+                            <a href="mailto:info@zemenay.com" className={styles.contactRow}>
                                 <MailIcon />
-                                <span>info@globaltize.com</span>
+                                <span>info@zemenay.com</span>
                             </a>
                             <div className={styles.contactRow}>
                                 <PinIcon />
@@ -209,13 +199,13 @@ export default function Footer() {
                     <div className={styles.divider} />
 
                     <div className={styles.bottom}>
-                        <p className={styles.copyright}>&copy; Copyright 2026. Globaltize.</p>
+                        <p className={styles.copyright}>&copy; Copyright 2026. Zemenay.</p>
                         <div className={styles.legalRow}>
-                            <Link to="https://www.globaltize.com/terms-and-conditions">Terms &amp; Conditions</Link>
+                            <Link to={MAIN('/terms-and-conditions')}>Terms &amp; Conditions</Link>
                             <span className={styles.legalDot} aria-hidden="true" />
-                            <Link to="https://www.globaltize.com/privacy-policy">Privacy Policy</Link>
+                            <Link to={MAIN('/privacy-policy')}>Privacy Policy</Link>
                             <span className={styles.legalDot} aria-hidden="true" />
-                            <Link to="https://www.globaltize.com/ai-and-llm-info">AI and LLM Info</Link>
+                            <Link to={MAIN('/ai-and-llm-info')}>AI and LLM Info</Link>
                         </div>
                     </div>
                 </div>

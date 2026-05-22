@@ -1,14 +1,20 @@
-/* Ported verbatim from Next.js project */
+/* Outer wrapper. Source: footer.framer-2I1CJ.framer-1p2h9k7 — has the same
+   light teal bg as the Steps section above (rgb(176, 213, 221)). Hosts the
+   clickable curve+arrow image at the top, then the dark teal main footer. */
 .wrapper {
     width: 100%;
-    background-color: transparent;
-    /* Remove potential leak color */
+    background-color: var(--color-highlight);
     position: relative;
-    padding-bottom: 0;
-    margin-top: -1px;
-    /* Overlap slightly with content above to prevent literal pixel leaks */
 }
 
+.wrapperTransparent {
+    background-color: transparent;
+}
+
+/* The curved border with a circular arrow cutout, baked into a single PNG
+   asset (8OubjvrkfmdSPi47CUoAjCIb8.png, 6048x772). The asset already
+   contains the wave shape AND the upward arrow inside the cutout — the
+   entire region is clickable as scroll-to-top. */
 .topCurve {
     width: 100%;
     aspect-ratio: calc(6048 / 772);
@@ -19,8 +25,6 @@
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    margin-bottom: -2px;
-    /* Pull footer up to meet the curve and prevent gaps */
 }
 
 .topCurve img {
@@ -29,16 +33,18 @@
     object-fit: cover;
     display: block;
     pointer-events: none;
+    filter: hue-rotate(44deg) brightness(0.85) contrast(1.1);
+    /* Shift teal to blue while preserving the white arrow visibility */
 }
 
+/* Main dark-teal footer. Source: footer.framer-xn03lz — rgb(1, 68, 79). */
 .footer {
-    background-color: var(--color-dark-accent);
+    background-color: #001B3A;
     color: var(--color-white);
     position: relative;
     overflow: hidden;
     padding: 80px 80px 0;
     z-index: 1;
-    margin-top: 0;
 }
 
 .content {
@@ -49,6 +55,7 @@
     z-index: 2;
 }
 
+/* Top grid: brand column + 4 link columns. */
 .grid {
     width: 100%;
     display: grid;
@@ -57,6 +64,7 @@
     padding-bottom: 60px;
 }
 
+/* ===== Brand column ===== */
 .brand {
     display: flex;
     flex-direction: column;
@@ -67,12 +75,22 @@
     display: inline-block;
 }
 
+.logo {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    overflow: visible;
+}
+
 .logoImg {
-    width: 182px;
-    height: 49px;
+    width: 200px;
+    height: 80px;
     display: block;
     object-fit: contain;
     object-position: left center;
+    transform: scale(2.5);
+    transform-origin: left center;
+    filter: brightness(0) invert(1);
 }
 
 .tagline {
@@ -83,6 +101,7 @@
     margin: 0;
 }
 
+/* Referral Program outline pill — gold border + gold text. */
 .referralBtn {
     display: inline-flex;
     align-items: center;
@@ -113,6 +132,7 @@
     object-fit: contain;
 }
 
+/* Social icons row. */
 .socials {
     display: flex;
     align-items: center;
@@ -141,6 +161,7 @@
     width: 48px;
 }
 
+/* ===== Link columns ===== */
 .column {
     display: flex;
     flex-direction: column;
@@ -191,10 +212,11 @@
     color: var(--color-highlight);
 }
 
+/* ===== Divider + bottom row ===== */
 .divider {
     width: 100%;
     height: 1px;
-    background-color: rgba(176, 213, 221, 0.3);
+    background-color: var(--divider-color);
     margin: 0;
 }
 
@@ -221,7 +243,8 @@
     font-family: var(--font-body);
     font-size: 14px;
     line-height: 20px;
-    color: rgb(143, 189, 195);
+    color: #60A5FA;
+    /* Blue tinted text */
     text-decoration: none;
     margin: 0;
 }
@@ -230,7 +253,7 @@
     width: 4px;
     height: 4px;
     border-radius: 50%;
-    background-color: rgb(143, 189, 195);
+    background-color: #60A5FA;
     opacity: 0.4;
 }
 
@@ -238,6 +261,9 @@
     color: var(--color-white);
 }
 
+/* Large background logo decoration that sits behind the bottom edge of the
+   footer. Source: framer-h2d579 — uses B1DBfTYW9BvQj1xc6AVsuOZsYlw.svg
+   (1432×256) at ~50% opacity, semi-transparent. */
 .bgLogo {
     position: absolute;
     left: 50%;
@@ -246,12 +272,15 @@
     width: 100%;
     max-width: 1432px;
     height: auto;
-    opacity: 0.18;
+    opacity: 0.3;
+    /* Increased opacity for visibility */
     pointer-events: none;
     z-index: 1;
     display: block;
+    filter: brightness(0) saturate(100%) invert(11%) sepia(44%) saturate(4681%) hue-rotate(204deg) brightness(91%) contrast(105%);
 }
 
+/* ===== Responsive ===== */
 @media (max-width: 1199px) {
     .footer {
         padding: 60px 50px 0;

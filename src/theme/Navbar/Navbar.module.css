@@ -29,7 +29,7 @@
 
 .scrolled {
     background-color: rgba(255, 255, 255, 0.55);
-    box-shadow: 0 8px 24px 0 rgba(0, 64, 73, 0.08);
+    box-shadow: 0 8px 24px 0 rgba(0, 74, 173, 0.08);
 }
 
 .logo {
@@ -39,11 +39,13 @@
 }
 
 .logo img {
-    width: 157px;
-    height: 28px;
+    width: 160px;
+    height: 56px;
     display: block;
     object-fit: contain;
     object-position: left center;
+    transform: scale(2.3);
+    transform-origin: left center;
 }
 
 .links {
@@ -103,7 +105,7 @@
     -webkit-backdrop-filter: blur(25px);
     border-radius: 16px;
     padding: 8px;
-    box-shadow: 0 8px 24px 0 rgba(0, 64, 73, 0.12);
+    box-shadow: 0 8px 24px 0 rgba(0, 74, 173, 0.12);
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -130,7 +132,7 @@
 }
 
 .dropdownItem:hover {
-    background-color: rgba(0, 97, 111, 0.08);
+    background-color: rgba(0, 74, 173, 0.08);
 }
 
 .ctas {
@@ -160,7 +162,7 @@
 }
 
 .findJob:hover {
-    background-color: rgba(0, 97, 111, 0.08);
+    background-color: rgba(0, 74, 173, 0.08);
 }
 
 .findJob svg {
@@ -186,8 +188,8 @@
     text-transform: uppercase;
     white-space: nowrap;
     box-shadow:
-        0 4px 10px 0 rgba(0, 64, 73, 0.15),
-        0 8px 20px 0 rgba(0, 64, 73, 0.1);
+        0 4px 10px 0 rgba(0, 74, 173, 0.15),
+        0 8px 20px 0 rgba(0, 74, 173, 0.1);
     transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
@@ -251,7 +253,7 @@
     display: none;
     flex-direction: column;
     gap: 4px;
-    box-shadow: 0 8px 24px 0 rgba(0, 64, 73, 0.12);
+    box-shadow: 0 8px 24px 0 rgba(0, 74, 173, 0.12);
 }
 
 .mobileNavLink {
@@ -288,7 +290,7 @@
 
 .mobileSubLink:hover,
 .mobileNavLink:hover {
-    background-color: rgba(0, 97, 111, 0.08);
+    background-color: rgba(0, 74, 173, 0.08);
 }
 
 .mobileCtas {

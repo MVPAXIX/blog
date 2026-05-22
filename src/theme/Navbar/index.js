@@ -4,15 +4,10 @@ import { useLocation } from '@docusaurus/router';
 import styles from './Navbar.module.css';
 import { SvgMask } from '../../components/SvgMask';
 
-const LOGO = 'https://framerusercontent.com/assets/lWECWOq0Fn4mo6YfodUyQN2uBc.svg';
-const SPARKLE = 'https://framerusercontent.com/assets/Gr828vetCecyI5E5uMHOwGF70c.svg';
-const ARROW = 'https://framerusercontent.com/assets/0cfN7HzjLoESazs4gVW87az7BE.svg';
+const LOGO = '/img/zemenay-logo.png';
 
-// These links point to the parent marketing site (globaltize.com/<page>),
-// NOT this blog. The blog deploys at a different origin than the main
-// site, so absolute URLs are the only thing that works regardless of
-// baseUrl or deployment topology.
-const MAIN = (p) => `https://www.globaltize.com${p}`;
+// Marketing site is on a different origin than the blog. Use absolute URLs.
+const MAIN = (p) => `https://www.zemenay.com${p}`;
 
 const NAV_LINKS = [
     {
@@ -24,29 +19,17 @@ const NAV_LINKS = [
             { label: 'Contractor Payments & EOR', href: MAIN('/contractor-payments-and-eor') },
         ],
     },
-    {
-        label: 'Regions',
-        dropdown: true,
-        items: [
-            { label: 'Southeast Asia', href: MAIN('/regions-guide/southeast-asia') },
-            { label: 'Latin America', href: MAIN('/regions-guide/latin-america') },
-            { label: 'South Africa', href: MAIN('/regions-guide/south-africa') },
-            { label: 'US & Canada', href: MAIN('/regions-guide/us-canada') },
-        ],
-    },
     { label: 'Testimonials', href: MAIN('/testimonials') },
     {
         label: 'Resources',
         dropdown: true,
         items: [
-            // The blog IS this site — link to blog home, which baseUrl already
-            // resolves to /blog/.
             { label: 'Blog', href: '/' },
             { label: 'Popular Roles', href: MAIN('/popular-roles') },
             { label: 'Industries', href: MAIN('/industries') },
             { label: 'Payroll Calculator', href: MAIN('/payroll-calculator') },
             { label: 'Refer & Earn', href: MAIN('/refer-and-earn') },
-            { label: 'Compare Globaltize', href: MAIN('/competitor-comparison') },
+            { label: 'Compare Zemenay', href: MAIN('/competitor-comparison') },
         ],
     },
     { label: 'Pricing', href: MAIN('/pricing') },
@@ -116,8 +99,8 @@ export default function Navbar() {
     return (
         <header className={styles.header}>
             <nav className={`${styles.nav} navbar ${scrolled ? styles.scrolled : ''}`}>
-                <Link to="/" className={styles.logo} aria-label="Globaltize home">
-                    <img src={`${LOGO}?width=157&height=28`} alt="Globaltize" />
+                <Link to="/" className={styles.logo} aria-label="Zemenay home">
+                    <img src={LOGO} alt="Zemenay" />
                 </Link>
 
                 <div className={styles.links} ref={dropdownRef}>
@@ -163,16 +146,16 @@ export default function Navbar() {
                 </div>
 
                 <div className={styles.ctas}>
-                    <Link to="https://www.globaltize.com/careers" className={styles.findJob}>
+                    <Link to={MAIN('/careers')} className={styles.findJob}>
                         FIND A JOB
                         <FindJobArrow />
                     </Link>
                     <Link
-                        href="https://app.iclosed.io/e/globaltize/hiring-strategy-session-website"
+                        href="https://app.iclosed.io/e/zemenay/hiring-strategy-session-website"
                         className={styles.startHiring}
                     >
                         <SvgMask src="https://framerusercontent.com/assets/Gr828vetCecyI5E5uMHOwGF70c.svg" color="var(--color-white)" className={styles.ctaIcon} style={{ width: 16, height: 16 }} />
-                        <span>START HIRING</span>
+                        <span>FREE CONSULTATION</span>
                         <SvgMask src="https://framerusercontent.com/assets/0cfN7HzjLoESazs4gVW87az7BE.svg" color="var(--color-white)" className={styles.ctaIcon} style={{ width: 17, height: 16 }} />
                     </Link>
                 </div>
@@ -221,7 +204,7 @@ export default function Navbar() {
                         ) : (
                             <Link
                                 key={item.label}
-                                href={item.href}
+                                to={item.href}
                                 className={styles.mobileNavLink}
                             >
                                 {item.label}
@@ -229,16 +212,16 @@ export default function Navbar() {
                         )
                     )}
                     <div className={styles.mobileCtas}>
-                        <Link to="https://www.globaltize.com/careers" className={styles.findJob}>
+                        <Link to={MAIN('/careers')} className={styles.findJob}>
                             FIND A JOB
                             <FindJobArrow />
                         </Link>
                         <Link
-                            href="https://app.iclosed.io/e/globaltize/hiring-strategy-session-website"
+                            href="https://app.iclosed.io/e/zemenay/hiring-strategy-session-website"
                             className={styles.startHiring}
                         >
                             <SvgMask src="https://framerusercontent.com/assets/Gr828vetCecyI5E5uMHOwGF70c.svg" color="var(--color-white)" className={styles.ctaIcon} style={{ width: 16, height: 16 }} />
-                            <span>START HIRING</span>
+                            <span>FREE CONSULTATION</span>
                             <SvgMask src="https://framerusercontent.com/assets/0cfN7HzjLoESazs4gVW87az7BE.svg" color="var(--color-white)" className={styles.ctaIcon} style={{ width: 17, height: 16 }} />
                         </Link>
                     </div>

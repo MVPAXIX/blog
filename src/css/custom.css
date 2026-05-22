@@ -10,29 +10,36 @@
 }
 
 :root {
-  --ifm-color-primary: #004049;
-  --ifm-color-primary-dark: #003a42;
-  --ifm-color-primary-darker: #00363e;
-  --ifm-color-primary-darkest: #002d33;
-  --ifm-color-primary-light: #004650;
-  --ifm-color-primary-lighter: #004953;
-  --ifm-color-primary-lightest: #00535f;
+  --ifm-color-primary: #004AAD;
+  --ifm-color-primary-dark: #00429c;
+  --ifm-color-primary-darker: #003e93;
+  --ifm-color-primary-darkest: #00337a;
+  --ifm-color-primary-light: #1a5cb5;
+  --ifm-color-primary-lighter: #2665ba;
+  --ifm-color-primary-lightest: #4d82ca;
 
-  /* Globaltize Colors */
-  --color-bg: #f0f6f7;
-  --color-primary: #004049;
-  --color-secondary: #006068;
-  --color-accent: #00616f;
-  --color-dark-accent: #01444f;
-  --color-highlight: #b0d5dd;
+  /* Globaltize Colors — Exact Mapping */
+  --color-bg: #EAF2FF;
+  /* Very light blue background */
+  --color-primary: #005BDB;
+  /* Hover states / secondary strong blue */
+  --color-secondary: #3B82F6;
+  /* Cards, profile tops */
+  --color-accent: #004AAD;
+  /* Primary CTA */
+  --color-dark-accent: #00337a;
+  /* Derived from accent */
+  --color-highlight: #BFDBFE;
+  /* Soft section backgrounds */
   --color-gold: #ffcd68;
   --color-white: #ffffff;
   --color-text-dark: #191919;
   --color-text-body: #1a1a1a;
   --color-text-muted: #4c4c4c;
   --color-text-light: #959595;
-  --color-cyan: #208c9c;
-  --color-mid-teal: #005461;
+  --color-cyan: #60A5FA;
+  /* Mid-tone highlights */
+  --color-mid-teal: #60A5FA;
   --color-near-black: #111111;
 
   /* Fonts */
@@ -40,9 +47,9 @@
   --font-body: "Inter", sans-serif;
   --font-nav: "Cabin", sans-serif;
 
-  /* Shadows */
-  --shadow-card: 0px 2px 18px 0px rgba(0, 64, 73, 0.15);
-  --shadow-card-hover: 0px 2px 18px 0px rgba(0, 64, 73, 0.15), 0px 8px 20px 0px rgba(0, 64, 73, 0.1);
+  /* Shadows — Updated from Teal to Blue */
+  --shadow-card: 0px 2px 18px 0px rgba(0, 74, 173, 0.15);
+  --shadow-card-hover: 0px 2px 18px 0px rgba(0, 74, 173, 0.15), 0px 8px 20px 0px rgba(0, 74, 173, 0.1);
 }
 
 body {
