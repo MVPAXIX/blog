@@ -15,7 +15,9 @@ const config = {
   },
 
   url: 'https://www.zemenay.com',
-  baseUrl: '/',
+  // Served same-origin under /blog (behind the main-site reverse proxy) so the
+  // marketing nav/footer "Blog" link resolves to /blog without sub-routing.
+  baseUrl: '/blog/',
   trailingSlash: false,
 
   onBrokenLinks: 'throw',

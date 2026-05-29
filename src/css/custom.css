@@ -41,6 +41,14 @@
   /* Mid-tone highlights */
   --color-mid-teal: #60A5FA;
   --color-near-black: #111111;
+  --color-bg-teal-light: #F0F6FF;
+  /* Subtle hover tint (matches main site) */
+
+  /* Radii (matches main site tokens) */
+  --radius-sm: 12px;
+  --radius-md: 13px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
 
   /* Fonts */
   --font-heading: "Degular Display Semibold", sans-serif;

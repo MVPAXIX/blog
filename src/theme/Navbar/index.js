@@ -3,33 +3,32 @@ import Link from '@docusaurus/Link';
 import { useLocation } from '@docusaurus/router';
 import styles from './Navbar.module.css';
 import { SvgMask } from '../../components/SvgMask';
+import { UserPlus, Invoice, Article, UsersThree } from '@phosphor-icons/react';
 
 const LOGO = '/img/zemenay-logo.png';
 
 // Marketing site is on a different origin than the blog. Use absolute URLs.
 const MAIN = (p) => `https://www.zemenay.com${p}`;
 
+// Mirrors the main-site navbar: same structure, built pages only, and the
+// exact Phosphor (duotone) icons used in the marketing dropdowns.
 const NAV_LINKS = [
     {
         label: 'How It Works',
         dropdown: true,
         items: [
-            { label: 'International Recruitment', href: MAIN('/recruitment') },
-            { label: 'US & Canada Recruitment', href: MAIN('/recruitment-united-states-canada') },
-            { label: 'Contractor Payments & EOR', href: MAIN('/contractor-payments-and-eor') },
+            { label: 'International Recruitment', href: MAIN('/recruitment'), Icon: UserPlus },
+            { label: 'Contractor Payments & EOR', href: MAIN('/contractor-payments-and-eor'), Icon: Invoice },
         ],
     },
+    { label: 'Regions Guide', href: MAIN('/regions-guide') },
     { label: 'Testimonials', href: MAIN('/testimonials') },
     {
         label: 'Resources',
         dropdown: true,
         items: [
-            { label: 'Blog', href: '/' },
-            { label: 'Popular Roles', href: MAIN('/popular-roles') },
-            { label: 'Industries', href: MAIN('/industries') },
-            { label: 'Payroll Calculator', href: MAIN('/payroll-calculator') },
-            { label: 'Refer & Earn', href: MAIN('/refer-and-earn') },
-            { label: 'Compare Zemenay', href: MAIN('/competitor-comparison') },
+            { label: 'Blog', href: '/', Icon: Article },
+            { label: 'Popular Roles', href: MAIN('/popular-roles'), Icon: UsersThree },
         ],
     },
     { label: 'Pricing', href: MAIN('/pricing') },
@@ -131,7 +130,12 @@ export default function Navbar() {
                                                 to={sub.href}
                                                 className={styles.dropdownItem}
                                             >
-                                                {sub.label}
+                                                {sub.Icon && (
+                                                    <span className={styles.dropdownIcon} aria-hidden="true">
+                                                        <sub.Icon weight="duotone" />
+                                                    </span>
+                                                )}
+                                                <span>{sub.label}</span>
                                             </Link>
                                         ))}
                                     </div>
@@ -195,7 +199,12 @@ export default function Navbar() {
                                                 to={sub.href}
                                                 className={styles.mobileSubLink}
                                             >
-                                                {sub.label}
+                                                {sub.Icon && (
+                                                    <span className={styles.dropdownIcon} aria-hidden="true">
+                                                        <sub.Icon weight="duotone" />
+                                                    </span>
+                                                )}
+                                                <span>{sub.label}</span>
                                             </Link>
                                         ))}
                                     </div>
