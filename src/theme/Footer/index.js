@@ -1,56 +1,43 @@
 import React from 'react';
-import Link from '@docusaurus/Link';
+import { useBaseUrlUtils } from '@docusaurus/useBaseUrl';
 import styles from './Footer.module.css';
-import { SvgMask } from '../../components/SvgMask';
 
-const FOOTER_LOGO = '/img/zemenay-logo.png';
-const TOP_CURVE = 'https://framerusercontent.com/assets/8OubjvrkfmdSPi47CUoAjCIb8.png';
+const TOP_CURVE = '/framer-assets/8OubjvrkfmdSPi47CUoAjCIb8.png';
+const BG_LOGO = '/logo/zemenay_logo.svg';
 
-// Marketing site lives at zemenay.com.
-const MAIN = (p) => `https://www.zemenay.com${p}`;
-
+// The blog is reverse-proxied under the main Next.js site at /blog (see
+// globaltize-next/next.config.mjs rewrites), so marketing pages are reached
+// with root-relative URLs on the same domain, rendered as plain <a> tags.
+// Mirrors src/components/Footer/Footer.js on the main site.
 const QUICK_LINKS = [
-    { label: 'Home', href: MAIN('/') },
-    { label: 'International Recruitment', href: MAIN('/recruitment') },
-    { label: 'United States Recruitment', href: MAIN('/recruitment-united-states-canada') },
-    { label: 'Contractor Payments & EOR', href: MAIN('/contractor-payments-and-eor') },
-    { label: 'Regions Guide', href: MAIN('/regions-guide') },
-    { label: 'Testimonials', href: MAIN('/testimonials') },
-    { label: 'Pricing', href: MAIN('/pricing') },
+    { label: 'Home', href: '/' },
+    { label: 'International Recruitment', href: '/recruitment' },
+    { label: 'Regions Guide', href: '/regions-guide' },
+    { label: 'Testimonials', href: '/testimonials' },
+    { label: 'Pricing', href: '/pricing' },
 ];
 
 const RESOURCES = [
-    { label: 'Refer & Earn', href: MAIN('/refer-and-earn') },
-    { label: 'Popular Roles', href: MAIN('/popular-roles') },
-    { label: 'Industries', href: MAIN('/industries') },
-    { label: 'Savings Calculator', href: MAIN('/payroll-calculator') },
-    { label: 'Compare Zemenay', href: MAIN('/competitor-comparison') },
+    { label: 'Popular Roles', href: '/popular-roles' },
     { label: 'Youtube Content', href: 'https://www.youtube.com/@Zemenay', external: true },
-    { label: 'Blogs', href: '/' },
 ];
 
 const JOIN_TEAM = [
-    { label: 'Careers', href: MAIN('/careers') },
-    { label: 'Past Hires Wall of Love', href: MAIN('/careers/candidate-wall-of-love') },
+    { label: 'Careers', href: '/careers' },
+    { label: 'Past Hires Wall of Love', href: '/careers/wall-of-love' },
 ];
 
 function FooterLink({ link }) {
-    if (link.external) {
-        return (
-            <a
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.footerLink}
-            >
-                {link.label}
-            </a>
-        );
-    }
     return (
-        <Link to={link.href} className={styles.footerLink}>
+        <a
+            href={link.href}
+            className={styles.footerLink}
+            {...(link.external
+                ? { target: '_blank', rel: 'noopener noreferrer' }
+                : {})}
+        >
             {link.label}
-        </Link>
+        </a>
     );
 }
 
@@ -89,6 +76,8 @@ function PinIcon() {
 }
 
 export default function Footer() {
+    const { withBaseUrl } = useBaseUrlUtils();
+
     const scrollToTop = () => {
         if (typeof window !== 'undefined') {
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -103,35 +92,32 @@ export default function Footer() {
                 onClick={scrollToTop}
                 aria-label="Scroll to top"
             >
-                <img src={TOP_CURVE} alt="" />
+                <img src={withBaseUrl(TOP_CURVE)} alt="" />
             </button>
 
             <footer className={styles.footer}>
+                <img
+                    src={withBaseUrl(BG_LOGO)}
+                    alt=""
+                    className={styles.bgLogo}
+                    aria-hidden="true"
+                />
                 <div className={styles.content}>
                     <div className={styles.grid}>
                         <div className={styles.brand}>
-                            <Link to={MAIN('/')} className={`${styles.logoLink} ${styles.logo}`}>
-                                <img src={FOOTER_LOGO} alt="Zemenay" className={styles.logoImg} />
-                            </Link>
+                            <div className={styles.logo}>
+                                <img
+                                    src={withBaseUrl('/logo/logo.svg')}
+                                    alt="Zemenay Logo"
+                                    className={styles.logoImg}
+                                />
+                            </div>
                             <p className={styles.tagline}>
                                 Your Complete Solution to Recruit, Hire, &amp; Pay Remote Employees
                                 Anywhere in the World.
                             </p>
-                            <Link to={MAIN('/refer-and-earn')} className={styles.referralBtn}>
-                                <SvgMask src="https://framerusercontent.com/assets/MSgWu9DJWNviZTUCfcHdjzuqFM.svg" color="var(--color-gold)" className={styles.referralIcon} />
-                                <span>Referral Program</span>
-                                <SvgMask src="https://framerusercontent.com/assets/ZNPDZXdtBubJf1jU8z1j2HJKnI.svg" color="var(--color-gold)" className={styles.referralIcon} />
-                            </Link>
                             <div className={styles.socials}>
-                                <a
-                                    href="https://www.youtube.com/@Zemenay"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="YouTube"
-                                    className={styles.socialLink}
-                                >
-                                    <SvgMask src="https://framerusercontent.com/assets/ZptX4pGvodtrodUYPQhTacTkllc.svg" color="var(--color-white)" className={`${styles.socialIcon} ${styles.socialIconYoutube}`} />
-                                </a>
+
                                 <a
                                     href="https://www.instagram.com/zemenay/"
                                     target="_blank"
@@ -139,7 +125,7 @@ export default function Footer() {
                                     aria-label="Instagram"
                                     className={styles.socialLink}
                                 >
-                                    <SvgMask src="https://framerusercontent.com/assets/kpXkm0lM5V7RsGzBNWphhqXdKKM.svg" color="var(--color-white)" className={styles.socialIcon} />
+                                    <img src={withBaseUrl('/framer-assets/kpXkm0lM5V7RsGzBNWphhqXdKKM.svg')} alt="" className={styles.socialIcon} />
                                 </a>
                                 <a
                                     href="https://www.linkedin.com/company/zemenay/"
@@ -148,50 +134,44 @@ export default function Footer() {
                                     aria-label="LinkedIn"
                                     className={styles.socialLink}
                                 >
-                                    <SvgMask src="https://framerusercontent.com/assets/vPIACnb09ujqJ0KsGtvhpVKC6Y.svg" color="var(--color-white)" className={styles.socialIcon} />
+                                    <img src={withBaseUrl('/framer-assets/vPIACnb09ujqJ0KsGtvhpVKC6Y.svg')} alt="" className={styles.socialIcon} />
                                 </a>
-                                <a
-                                    href="https://www.facebook.com/p/Zemenay-61560837877574/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="Facebook"
-                                    className={styles.socialLink}
-                                >
-                                    <SvgMask src="https://framerusercontent.com/assets/wBqNfzU558UwoMjlWvU21NXc5c.svg" color="var(--color-white)" className={styles.socialIcon} />
-                                </a>
+
                             </div>
                         </div>
 
-                        <div className={styles.column}>
-                            <h4 className={styles.columnTitle}>Quick Links</h4>
-                            {QUICK_LINKS.map((link) => (
-                                <FooterLink key={link.href} link={link} />
-                            ))}
-                        </div>
+                        <div className={styles.linksGroup}>
+                            <div className={styles.column}>
+                                <h4 className={styles.columnTitle}>Quick Links</h4>
+                                {QUICK_LINKS.map((link) => (
+                                    <FooterLink key={link.href} link={link} />
+                                ))}
+                            </div>
 
-                        <div className={styles.column}>
-                            <h4 className={styles.columnTitle}>Resources</h4>
-                            {RESOURCES.map((link) => (
-                                <FooterLink key={link.href} link={link} />
-                            ))}
-                        </div>
+                            <div className={styles.column}>
+                                <h4 className={styles.columnTitle}>Resources</h4>
+                                {RESOURCES.map((link) => (
+                                    <FooterLink key={link.href} link={link} />
+                                ))}
+                            </div>
 
-                        <div className={styles.column}>
-                            <h4 className={styles.columnTitle}>Join The Team</h4>
-                            {JOIN_TEAM.map((link) => (
-                                <FooterLink key={link.href} link={link} />
-                            ))}
-                        </div>
+                            <div className={styles.column}>
+                                <h4 className={styles.columnTitle}>Join The Team</h4>
+                                {JOIN_TEAM.map((link) => (
+                                    <FooterLink key={link.href} link={link} />
+                                ))}
+                            </div>
 
-                        <div className={styles.column}>
-                            <h4 className={styles.columnTitle}>Get In Touch</h4>
-                            <a href="mailto:info@zemenay.com" className={styles.contactRow}>
-                                <MailIcon />
-                                <span>info@zemenay.com</span>
-                            </a>
-                            <div className={styles.contactRow}>
-                                <PinIcon />
-                                <span>3400 Cottage Way STE G2 Sacramento, CA 95825</span>
+                            <div className={styles.column}>
+                                <h4 className={styles.columnTitle}>Get In Touch</h4>
+                                <a href="mailto:zemenaytechsolutions@gmail.com" className={styles.contactRow}>
+                                    <MailIcon />
+                                    <span>zemenaytechsolutions@gmail.com</span>
+                                </a>
+                                <div className={styles.contactRow}>
+                                    <PinIcon />
+                                    <span>Bole, Adiss Ababa, Ethiopia</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -199,18 +179,19 @@ export default function Footer() {
                     <div className={styles.divider} />
 
                     <div className={styles.bottom}>
-                        <p className={styles.copyright}>&copy; Copyright 2026. Zemenay.</p>
-                        <div className={styles.legalRow}>
-                            <Link to={MAIN('/terms-and-conditions')}>Terms &amp; Conditions</Link>
-                            <span className={styles.legalDot} aria-hidden="true" />
-                            <Link to={MAIN('/privacy-policy')}>Privacy Policy</Link>
-                            <span className={styles.legalDot} aria-hidden="true" />
-                            <Link to={MAIN('/ai-and-llm-info')}>AI and LLM Info</Link>
+                        <div className={styles.bottomLeft}>
+                            <p className={styles.copyright}>&copy; Copyright 2026. Zemenay.</p>
+                            <div className={styles.legalRow}>
+                                <a href="#">Terms &amp; Conditions</a>
+                                <span className={styles.legalDot} aria-hidden="true" />
+                                <a href="#">Privacy Policy</a>
+                                <span className={styles.legalDot} aria-hidden="true" />
+                                <a href="#">AI and LLM Info</a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <SvgMask src="https://framerusercontent.com/assets/B1DBfTYW9BvQj1xc6AVsuOZsYlw.svg" color="var(--color-mid-teal)" className={styles.bgLogo} aria-hidden="true" />
             </footer>
         </div>
     );

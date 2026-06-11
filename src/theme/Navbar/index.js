@@ -1,39 +1,47 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from '@docusaurus/Link';
 import { useLocation } from '@docusaurus/router';
+import { useBaseUrlUtils } from '@docusaurus/useBaseUrl';
 import styles from './Navbar.module.css';
 import { SvgMask } from '../../components/SvgMask';
-import { UserPlus, Invoice, Article, UsersThree } from '@phosphor-icons/react';
 
-const LOGO = '/img/zemenay-logo.png';
+const LOGO = '/logo/logo.svg';
 
-// Marketing site is on a different origin than the blog. Use absolute URLs.
-const MAIN = (p) => `https://www.zemenay.com${p}`;
-
-// Mirrors the main-site navbar: same structure, built pages only, and the
-// exact Phosphor (duotone) icons used in the marketing dropdowns.
+// The blog is reverse-proxied under the main Next.js site at /blog (see
+// globaltize-next/next.config.mjs rewrites), so marketing pages are reached
+// with root-relative URLs on the same domain. They must render as plain <a>
+// tags (full page load) — react-router has no routes for them.
+// Mirrors src/components/Navbar/Navbar.js on the main site (same structure,
+// same icons); `local: true` marks pages served by the blog itself.
 const NAV_LINKS = [
     {
         label: 'How It Works',
         dropdown: true,
         items: [
-            { label: 'International Recruitment', href: MAIN('/recruitment'), Icon: UserPlus },
-            { label: 'Contractor Payments & EOR', href: MAIN('/contractor-payments-and-eor'), Icon: Invoice },
+            { label: 'International Recruitment', href: '/recruitment', iconSrc: '/framer-assets/intl.svg' },
+            { label: 'Contractor Payments & EOR', href: '/contractor-payments-and-eor', iconSrc: '/framer-assets/payrol.png' },
         ],
     },
-    { label: 'Regions Guide', href: MAIN('/regions-guide') },
-    { label: 'Testimonials', href: MAIN('/testimonials') },
+    { label: 'Regions Guide', href: '/regions-guide' },
+    { label: 'Testimonials', href: '/testimonials' },
     {
         label: 'Resources',
         dropdown: true,
         items: [
-            { label: 'Blog', href: '/', Icon: Article },
-            { label: 'Popular Roles', href: MAIN('/popular-roles'), Icon: UsersThree },
+            { label: 'Blog', href: '/', local: true, iconSrc: '/framer-assets/blog_blue.svg' },
+            { label: 'Popular Roles', href: '/popular-roles', iconSrc: '/framer-assets/popularroles_blue.svg' },
+            { label: 'Hire By Tech Stack', href: '/hire-by-tech-stack', iconSrc: '/framer-assets/hireblue.svg' },
         ],
     },
-    { label: 'Pricing', href: MAIN('/pricing') },
+    { label: 'Pricing', href: '/pricing' },
 ];
 
+// Same booking destination as the main site (src/lib/booking.js).
+const GOOGLE_BOOKING_URL =
+    'https://calendar.google.com/calendar/appointments/schedules/REPLACE_WITH_REAL_SCHEDULE_ID';
+
+// Filled-triangle caret matching the original Framer SVG (viewBox 24x24,
+// path "m11.998 17 7-8h-14z"). Drawn inline so it inherits color.
 function Caret({ className }) {
     return (
         <svg
@@ -47,6 +55,8 @@ function Caret({ className }) {
     );
 }
 
+// The small right-arrow icon on the FIND A JOB button — reuses the exact
+// SVG path the Framer source masks in (M 8 0 L 6.59 1.41 ... shape).
 function FindJobArrow() {
     return (
         <svg
@@ -65,15 +75,28 @@ function FindJobArrow() {
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
+    const [scrollProgress, setScrollProgress] = useState(0);
     const [mobileOpen, setMobileOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState(null);
     const location = useLocation();
     const dropdownRef = useRef(null);
+    const { withBaseUrl } = useBaseUrlUtils();
 
     useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 20);
+        const handleScroll = () => {
+            const scrollTop = window.scrollY;
+            setScrolled(scrollTop > 20);
+            const max =
+                document.documentElement.scrollHeight - window.innerHeight;
+            setScrollProgress(max > 0 ? Math.min(scrollTop / max, 1) : 0);
+        };
+        handleScroll();
         window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
+        window.addEventListener('resize', handleScroll, { passive: true });
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', handleScroll);
+        };
     }, []);
 
     useEffect(() => {
@@ -95,11 +118,45 @@ export default function Navbar() {
         setActiveDropdown(activeDropdown === label ? null : label);
     };
 
+    // Local blog pages keep client-side routing; marketing pages do a full
+    // navigation so the main-site proxy serves them.
+    const renderItemLink = (item, className, onClick) =>
+        item.local ? (
+            <Link
+                key={item.label}
+                to={withBaseUrl(item.href)}
+                className={className}
+                onClick={onClick}
+            >
+                {item.iconSrc && (
+                    <span className={styles.dropdownIcon} aria-hidden="true">
+                        <img src={withBaseUrl(item.iconSrc)} alt="" />
+                    </span>
+                )}
+                <span>{item.label}</span>
+            </Link>
+        ) : (
+            <a key={item.label} href={item.href} className={className} onClick={onClick}>
+                {item.iconSrc && (
+                    <span className={styles.dropdownIcon} aria-hidden="true">
+                        <img src={withBaseUrl(item.iconSrc)} alt="" />
+                    </span>
+                )}
+                <span>{item.label}</span>
+            </a>
+        );
+
     return (
         <header className={styles.header}>
             <nav className={`${styles.nav} navbar ${scrolled ? styles.scrolled : ''}`}>
-                <Link to="/" className={styles.logo} aria-label="Zemenay home">
-                    <img src={LOGO} alt="Zemenay" />
+                <span className={styles.progressTrack} aria-hidden="true">
+                    <span
+                        className={styles.progressBar}
+                        style={{ transform: `scaleX(${scrollProgress})` }}
+                    />
+                </span>
+                <Link to={withBaseUrl('/')} className={styles.logo} aria-label="Zemenay home">
+                    <img src={withBaseUrl(LOGO)} alt="Zemenay" />
                 </Link>
 
                 <div className={styles.links} ref={dropdownRef}>
@@ -124,44 +181,33 @@ export default function Navbar() {
                                 </button>
                                 {activeDropdown === item.label && (
                                     <div className={styles.dropdown}>
-                                        {item.items.map((sub) => (
-                                            <Link
-                                                key={sub.href}
-                                                to={sub.href}
-                                                className={styles.dropdownItem}
-                                            >
-                                                {sub.Icon && (
-                                                    <span className={styles.dropdownIcon} aria-hidden="true">
-                                                        <sub.Icon weight="duotone" />
-                                                    </span>
-                                                )}
-                                                <span>{sub.label}</span>
-                                            </Link>
-                                        ))}
+                                        {item.items.map((sub) =>
+                                            renderItemLink(sub, styles.dropdownItem)
+                                        )}
                                     </div>
                                 )}
                             </div>
                         ) : (
-                            <Link key={item.label} to={item.href} className={styles.navLink}>
+                            <a key={item.label} href={item.href} className={styles.navLink}>
                                 {item.label}
-                            </Link>
+                            </a>
                         )
                     )}
                 </div>
 
                 <div className={styles.ctas}>
-                    <Link to={MAIN('/careers')} className={styles.findJob}>
+                    <a href="/careers" className={styles.findJob}>
                         FIND A JOB
                         <FindJobArrow />
-                    </Link>
-                    <Link
-                        href="https://app.iclosed.io/e/zemenay/hiring-strategy-session-website"
+                    </a>
+                    <a
+                        href={GOOGLE_BOOKING_URL}
                         className={styles.startHiring}
                     >
-                        <SvgMask src="https://framerusercontent.com/assets/Gr828vetCecyI5E5uMHOwGF70c.svg" color="var(--color-white)" className={styles.ctaIcon} style={{ width: 16, height: 16 }} />
+                        <SvgMask src={withBaseUrl('/framer-assets/tinted/Gr828vetCecyI5E5uMHOwGF70c.svg')} color="var(--color-white)" className={styles.ctaIcon} style={{ width: 16, height: 16 }} />
                         <span>FREE CONSULTATION</span>
-                        <SvgMask src="https://framerusercontent.com/assets/0cfN7HzjLoESazs4gVW87az7BE.svg" color="var(--color-white)" className={styles.ctaIcon} style={{ width: 17, height: 16 }} />
-                    </Link>
+                        <SvgMask src={withBaseUrl('/framer-assets/tinted/0cfN7HzjLoESazs4gVW87az7BE.svg')} color="var(--color-white)" className={styles.ctaIcon} style={{ width: 17, height: 16 }} />
+                    </a>
                 </div>
 
                 <button
@@ -193,46 +239,38 @@ export default function Navbar() {
                                 </button>
                                 {activeDropdown === item.label && (
                                     <div className={styles.mobileSubMenu}>
-                                        {item.items.map((sub) => (
-                                            <Link
-                                                key={sub.href}
-                                                to={sub.href}
-                                                className={styles.mobileSubLink}
-                                            >
-                                                {sub.Icon && (
-                                                    <span className={styles.dropdownIcon} aria-hidden="true">
-                                                        <sub.Icon weight="duotone" />
-                                                    </span>
-                                                )}
-                                                <span>{sub.label}</span>
-                                            </Link>
-                                        ))}
+                                        {item.items.map((sub) =>
+                                            renderItemLink(sub, styles.mobileSubLink, () =>
+                                                setMobileOpen(false)
+                                            )
+                                        )}
                                     </div>
                                 )}
                             </div>
                         ) : (
-                            <Link
+                            <a
                                 key={item.label}
-                                to={item.href}
+                                href={item.href}
                                 className={styles.mobileNavLink}
+                                onClick={() => setMobileOpen(false)}
                             >
                                 {item.label}
-                            </Link>
+                            </a>
                         )
                     )}
                     <div className={styles.mobileCtas}>
-                        <Link to={MAIN('/careers')} className={styles.findJob}>
+                        <a href="/careers" className={styles.findJob}>
                             FIND A JOB
                             <FindJobArrow />
-                        </Link>
-                        <Link
-                            href="https://app.iclosed.io/e/zemenay/hiring-strategy-session-website"
+                        </a>
+                        <a
+                            href={GOOGLE_BOOKING_URL}
                             className={styles.startHiring}
                         >
-                            <SvgMask src="https://framerusercontent.com/assets/Gr828vetCecyI5E5uMHOwGF70c.svg" color="var(--color-white)" className={styles.ctaIcon} style={{ width: 16, height: 16 }} />
+                            <SvgMask src={withBaseUrl('/framer-assets/tinted/Gr828vetCecyI5E5uMHOwGF70c.svg')} color="var(--color-white)" className={styles.ctaIcon} style={{ width: 16, height: 16 }} />
                             <span>FREE CONSULTATION</span>
-                            <SvgMask src="https://framerusercontent.com/assets/0cfN7HzjLoESazs4gVW87az7BE.svg" color="var(--color-white)" className={styles.ctaIcon} style={{ width: 17, height: 16 }} />
-                        </Link>
+                            <SvgMask src={withBaseUrl('/framer-assets/tinted/0cfN7HzjLoESazs4gVW87az7BE.svg')} color="var(--color-white)" className={styles.ctaIcon} style={{ width: 17, height: 16 }} />
+                        </a>
                     </div>
                 </div>
             )}

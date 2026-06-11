@@ -1,57 +1,98 @@
-/* Ported verbatim from Next.js project */
+/* Ported verbatim from the main site's src/components/Navbar/Navbar.module.css */
+
+/* Outer fixed header that holds the floating nav pill.
+   Source: .framer-8fq5x9 — fixed, top:0, padding 16px 0 0, place-content center. */
 .header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 100;
+    z-index: 1000;
     display: flex;
     justify-content: center;
-    padding: 24px 24px 0;
+    padding: 16px 24px 0;
     pointer-events: none;
+    isolation: isolate;
 }
 
+/* The translucent glass pill.
+   Source: .framer-119y067 — max-width 1312, padding 16px 20px 16px 32px,
+   place-content center space-between, radius 24px, backdrop blur(25px),
+   bg rgba(255,255,255,0.3). */
 .nav {
     pointer-events: auto;
+    position: relative;
     width: 100%;
-    max-width: 1312px;
+    max-width: 1440px;
     padding: 16px 20px 16px 32px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 24px;
-    background-color: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
+    /* Refined Glassmorphism: Clearer frosted glass with balanced blur and saturation */
+    background-color: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-radius: 24px;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+    opacity: 1;
+    height: auto;
+    /* No border/shadow at rest so the bar blends into the page (matches reference) */
+    box-shadow: none;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-.scrolled {
-    background-color: rgba(255, 255, 255, 0.55);
-    box-shadow: 0 8px 24px 0 rgba(0, 74, 173, 0.08);
+/* Scroll-progress bar pinned to the pill's bottom border.
+   Source: .framer-1yxb4gb-container (absolute, bottom:0, width:100%) +
+   inner 2px bar (transform-origin 0% 0%, scaleX(progress)).
+   The track clips the bar to the pill's rounded corners. */
+.progressTrack {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 3;
 }
 
+.progressBar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-primary);
+    transform-origin: 0% 50%;
+    transform: scaleX(0);
+    will-change: transform;
+}
+
+/* Logo. Source: .framer-1nf0s7q (gap 10px, min-width 100px) + .framer-1iigljb
+   (157x28). We keep the Zemenay wordmark; its SVG has an oversized canvas, so
+   we crop to the wordmark with object-fit + a fixed visual height. */
 .logo {
     display: flex;
     align-items: center;
     flex-shrink: 0;
+    height: 32px;
 }
 
 .logo img {
-    width: 160px;
-    height: 56px;
+    height: 100%;
+    width: auto;
     display: block;
     object-fit: contain;
     object-position: left center;
-    transform: scale(2.3);
-    transform-origin: left center;
 }
 
+/* Nav links — centered, taking the middle space.
+   Source: .framer-y23gmp — flex:1 0 0, place-content center, gap 30px. */
 .links {
     display: flex;
+    flex: 1 1 0;
     align-items: center;
+    justify-content: center;
     gap: 24px;
+    padding: 0 28px;
 }
 
 .dropdownWrapper {
@@ -60,31 +101,34 @@
     align-items: center;
 }
 
+/* A nav link (with or without dropdown). Cabin 14px per Framer source. */
 .navLink {
     display: inline-flex;
     align-items: center;
-    gap: 2px;
+    gap: 4px;
     padding: 4px 0;
     background: transparent;
     border: none;
     cursor: pointer;
-    font-family: var(--font-nav);
-    font-size: 14px;
-    font-weight: 500;
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
     line-height: 1.25em;
-    color: rgb(17, 17, 17);
+    color: var(--color-near-black);
     text-decoration: none;
     white-space: nowrap;
-    transition: opacity 0.15s ease;
+    transition: color 0.15s ease;
 }
 
 .navLink:hover {
-    opacity: 0.7;
+    color: var(--color-accent);
 }
 
+/* Filled-triangle caret matching the source SVG (path m11.998 17 7-8h-14z). */
 .caret {
     width: 22px;
     height: 22px;
+    margin-left: 4px;
     flex-shrink: 0;
     display: block;
     transition: transform 0.2s ease;
@@ -94,81 +138,82 @@
     transform: rotate(180deg);
 }
 
+/* Dropdown panel that opens under a link */
 .dropdown {
     position: absolute;
-    top: calc(100% + 26px);
+    top: calc(100% + 40px);
     left: 50%;
     transform: translateX(-50%);
-    min-width: 280px;
-    background: var(--color-white);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: var(--radius-xl);
-    padding: 12px;
+    width: 320px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-radius: 16px;
+    padding: 20px 9px;
     box-shadow:
-        0 16px 40px 0 color-mix(in srgb, var(--color-accent) 16%, transparent),
-        0 2px 8px 0 color-mix(in srgb, var(--color-accent) 8%, transparent);
+        0 12px 36px 0 rgba(0, 0, 0, 0.08),
+        0 1px 4px 0 rgba(0, 0, 0, 0.02);
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    z-index: 5;
+    gap: 6px;
 }
 
+/* Invisible bridge to prevent pointer from leaving when crossing the gap */
 .dropdown::before {
     content: '';
     position: absolute;
-    top: -26px;
+    top: -40px;
     left: 0;
     right: 0;
-    height: 26px;
+    height: 40px;
 }
 
 .dropdownItem {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 10px 12px;
-    border-radius: var(--radius-md);
-    font-family: var(--font-nav);
+    gap: 16px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-family: var(--font-body);
     font-size: 15px;
     font-weight: 500;
-    line-height: 1.3;
     color: var(--color-near-black);
     text-decoration: none;
     transition: background-color 0.15s ease;
 }
 
 .dropdownItem:hover {
-    background-color: var(--color-bg-teal-light);
+    background-color: rgba(0, 74, 173, 0.08);
 }
 
 .dropdownIcon {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 24px;
+    height: 24px;
     flex-shrink: 0;
-    width: 24px;
-    height: 24px;
-    color: var(--color-accent);
 }
 
-.dropdownIcon svg {
-    width: 24px;
-    height: 24px;
-    display: block;
+.dropdownIcon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
+/* CTA buttons container. Source: .framer-16v7dfh — gap 15px, flex-end. */
 .ctas {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 15px;
     flex-shrink: 0;
 }
 
+/* FIND A JOB — outline pill. Source: .framer-jmtGW.framer-ueora7 (padding 16px 20px) */
 .findJob {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 12px 16px;
+    padding: 16px 20px;
     border: 1px solid var(--color-accent);
     border-radius: 16px;
     background-color: transparent;
@@ -184,7 +229,7 @@
 }
 
 .findJob:hover {
-    background-color: var(--color-bg-teal-light);
+    background-color: rgba(0, 74, 173, 0.08);
 }
 
 .findJob svg {
@@ -194,11 +239,13 @@
     display: block;
 }
 
+/* START HIRING — filled pill. Source: .framer-XpB8o.framer-v-182hcd2.framer-cr1r1r
+   (padding 16px 20px, gap 8px, radius 16px, shadow). */
 .startHiring {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 12px 16px;
+    padding: 16px 20px;
     border-radius: 16px;
     background-color: var(--color-primary);
     color: var(--color-white);
@@ -228,6 +275,7 @@
     object-fit: contain;
 }
 
+/* Mobile hamburger */
 .hamburger {
     display: none;
     flex-direction: column;
@@ -239,13 +287,15 @@
     border: none;
     cursor: pointer;
     padding: 8px;
+    flex-shrink: 0;
 }
 
 .hamburger span {
     display: block;
     width: 20px;
     height: 2px;
-    background-color: rgb(17, 17, 17);
+    background-color: var(--color-near-black);
+    border-radius: 2px;
     transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
@@ -261,6 +311,7 @@
     transform: translateY(-7px) rotate(-45deg);
 }
 
+/* Mobile menu */
 .mobileMenu {
     pointer-events: auto;
     position: absolute;
@@ -287,9 +338,9 @@
     border-radius: 12px;
     background: transparent;
     border: none;
-    font-family: var(--font-nav);
+    font-family: var(--font-body);
     font-size: 16px;
-    color: rgb(17, 17, 17);
+    color: var(--color-near-black);
     text-decoration: none;
     cursor: pointer;
 }
@@ -306,25 +357,15 @@
     gap: 10px;
     padding: 10px 14px;
     border-radius: 10px;
-    font-family: var(--font-nav);
+    font-family: var(--font-body);
     font-size: 14px;
     color: var(--color-near-black);
     text-decoration: none;
 }
 
-.mobileSubLink .dropdownIcon {
-    width: 20px;
-    height: 20px;
-}
-
-.mobileSubLink .dropdownIcon svg {
-    width: 20px;
-    height: 20px;
-}
-
 .mobileSubLink:hover,
 .mobileNavLink:hover {
-    background-color: var(--color-bg-teal-light);
+    background-color: rgba(0, 74, 173, 0.08);
 }
 
 .mobileCtas {
@@ -334,6 +375,7 @@
     margin-top: 8px;
 }
 
+/* ===== Responsive ===== */
 @media (max-width: 1199px) {
     .nav {
         padding: 12px 16px 12px 24px;
@@ -341,6 +383,7 @@
 
     .links {
         gap: 20px;
+        padding: 0 20px;
     }
 }
 
@@ -354,6 +397,11 @@
         gap: 12px;
     }
 
+    .logo {
+        height: 28px;
+    }
+
+    /* !important guards against Docusaurus/infima .navbar descendant styles */
     .links {
         display: none !important;
     }

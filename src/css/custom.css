@@ -29,8 +29,8 @@
   /* Primary CTA */
   --color-dark-accent: #00337a;
   /* Derived from accent */
-  --color-highlight: #BFDBFE;
-  /* Soft section backgrounds */
+  --color-highlight: #004aad;
+  /* Matches main-site globals.css */
   --color-gold: #ffcd68;
   --color-white: #ffffff;
   --color-text-dark: #191919;
@@ -43,6 +43,9 @@
   --color-near-black: #111111;
   --color-bg-teal-light: #F0F6FF;
   /* Subtle hover tint (matches main site) */
+
+  /* Footer divider (matches main-site globals.css) */
+  --divider-color: rgba(191, 219, 254, 0.3);
 
   /* Radii (matches main site tokens) */
   --radius-sm: 12px;
