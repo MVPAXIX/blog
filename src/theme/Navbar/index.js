@@ -20,6 +20,7 @@ const NAV_LINKS = [
         items: [
             { label: 'International Recruitment', href: '/recruitment', iconSrc: '/framer-assets/intl.svg' },
             { label: 'Contractor Payments & EOR', href: '/contractor-payments-and-eor', iconSrc: '/framer-assets/payrol.png' },
+            
         ],
     },
     { label: 'Regions Guide', href: '/regions-guide' },
@@ -30,7 +31,10 @@ const NAV_LINKS = [
         items: [
             { label: 'Blog', href: '/', local: true, iconSrc: '/framer-assets/blog_blue.svg' },
             { label: 'Popular Roles', href: '/popular-roles', iconSrc: '/framer-assets/popularroles_blue.svg' },
-            { label: 'Hire By Tech Stack', href: '/hire-by-tech-stack', iconSrc: '/framer-assets/hireblue.svg' },
+            { label: 'Tech Outsourcing', href: '/hire-by-tech-stack', iconSrc: '/framer-assets/hireblue.svg' },
+            { label: 'Virtual Assistance', href: '/virtual-assistance', iconSrc: '/framer-assets/virtual_assistant.svg' },
+            { label: 'Call Center', href: '/call-center', iconSrc: '/framer-assets/customer_care.svg' },
+            { label: 'Customer Care', href: '/customer-care', iconSrc: '/framer-assets/call_center.svg' },
         ],
     },
     { label: 'Pricing', href: '/pricing' },

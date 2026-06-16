@@ -1,0 +1,17 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="#2B8FE3"/>
+
+  <!-- Heart shape -->
+  <path d="M32 47
+           C 18 38, 14 30, 14 24
+           C 14 18, 19 14, 24 16
+           C 28 17.5, 30 21, 32 24
+           C 34 21, 36 17.5, 40 16
+           C 45 14, 50 18, 50 24
+           C 50 30, 46 38, 32 47 Z"
+        fill="#FFFFFF"/>
+
+  <!-- Hand support arc underneath -->
+  <path d="M16 44 a16 16 0 0 0 32 0" stroke="#FFFFFF" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>

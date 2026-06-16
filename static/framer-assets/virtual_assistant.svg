@@ -1,0 +1,21 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="#2B8FE3"/>
+
+  <!-- Headset band -->
+  <path d="M18 30 a14 14 0 0 1 28 0" stroke="#FFFFFF" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+  <!-- Left ear cup -->
+  <rect x="14" y="28" width="7" height="12" rx="3.5" fill="#FFFFFF"/>
+  <!-- Right ear cup -->
+  <rect x="43" y="28" width="7" height="12" rx="3.5" fill="#FFFFFF"/>
+
+  <!-- Chat bubble (assistant response) -->
+  <rect x="20" y="34" width="24" height="16" rx="4" fill="#FFFFFF"/>
+  <path d="M26 50 l0 5 l6 -5 z" fill="#FFFFFF"/>
+
+  <!-- Dots inside bubble representing conversation -->
+  <circle cx="27" cy="42" r="2" fill="#2B8FE3"/>
+  <circle cx="32" cy="42" r="2" fill="#2B8FE3"/>
+  <circle cx="37" cy="42" r="2" fill="#2B8FE3"/>
+</svg>
