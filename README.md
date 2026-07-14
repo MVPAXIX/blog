@@ -1,149 +1,140 @@
-Guide Go Blog
+# Zemenay Blog — Content Repo
 
-A comprehensive travel blog built with [Docusaurus](https://docusaurus.io/) featuring in-depth articles about Ethiopia and other global destinations. This blog focuses on cultural experiences, adventure travel, and authentic travel insights.
+This repo is the **single source of truth for every article on
+[zemenaytech.com/blog](https://zemenaytech.com/blog)**.
 
-## 🌍 About This Blog
+Posts are written here as Docusaurus-style markdown. The Zemenay site
+(`MichaelGetu-git/Zemenay-Revamped-2026`) imports everything in `blog/` at
+build time — text, frontmatter, and poster images — and renders it with the
+site's own design. You never need to touch the site repo to publish.
 
-The AI Travel Blog is dedicated to providing travelers with authentic, culturally-rich content about Ethiopia and beyond. Our articles cover:
-
-- **Ethiopian Culture & Tribes**: Deep dives into Ethiopia's diverse ethnic groups and traditions
-- **Adventure Travel**: Hiking, wildlife viewing, and outdoor experiences
-- **Cultural Experiences**: Authentic encounters with local communities
-- **Travel Guides**: Practical information for planning your trips
-
-### Current Articles
-
-- **Semien Mountains**: Ethiopia's Roof of Africa and UNESCO World Heritage Site
-- **Mursi Tribe**: Guardians of Ethiopia's Cultural Heritage
-- **Southern Ethiopia Road Trip**: Tribes, Tribes, and Natural Wonders
-- **Northern Ethiopia Travel Guide**: Ancient Castles, Rock Churches, and Timeless Wonders
-
-## 🚀 Quick Start
-
-### Prerequisites
-
-- Node.js 18.0 or later
-- Yarn or npm
-
-### Installation
-
-```bash
-npm install
-# or
-yarn install
+```
+write .mdx + poster here  →  git push  →  site rebuilds  →  live on /blog
 ```
 
-### Local Development
+---
 
-```bash
-npm start
-# or
-yarn start
+## ✍️ How to publish a post
+
+### 1. Create the post file
+
+Add a file to `blog/` named with the publish date:
+
+```
+blog/2026-07-15-my-new-post.mdx
 ```
 
-This command starts a local development server at `http://localhost:3001/blog/` and opens it in your browser. Changes are reflected live without restarting the server.
+The date prefix becomes the post's "Last Update" date on the site.
 
-### Build for Production
+### 2. Add the poster
 
-```bash
-npm run build
-# or
-yarn build
-```
+Drop a **16:9 landscape image** (PNG/JPG, ~1366×768 or larger) into
+`blog/img/`. This is the hero image on the post page and on every card.
 
-This generates static content in the `build/` directory, ready for deployment to any static hosting service.
-
-### Deployment Options
-
-#### Option 1: Deploy to Subdirectory (Recommended)
-
-This blog is configured to deploy as a subdirectory (e.g., `yourwebsite.com/blog/`). Simply upload the contents of the `build/` directory to your web server's `/blog/` path.
-
-#### Option 2: GitHub Pages
-
-Using SSH:
-```bash
-USE_SSH=true npm run deploy
-# or
-USE_SSH=true yarn deploy
-```
-
-Without SSH:
-```bash
-GIT_USER=<Your GitHub username> npm run deploy
-# or
-GIT_USER=<Your GitHub username> yarn deploy
-```
-
-## 📝 Writing Articles
-
-### Blog Post Structure
-
-Articles are stored in `blog/YYYY/` directory with filenames following the pattern: `YYYY-MM-DD-title-slug.mdx`
-
-Example: `2026-01-17-mursi-tribe-ethiopia.mdx`
-
-### Frontmatter Format
+### 3. Write the frontmatter
 
 ```yaml
 ---
-slug: your-article-slug
-title: "Your Article Title"
-description: Brief description for SEO
-authors: michael
-tags: [ethiopia, culture, travel]
-created_at: 2026-01-17
-date: 2026-01-17
+slug: my-new-post
+title: 'My New Post Title'
+authors: [michael]
+tags: [outsourcing, hiring]
+image: ./img/my-poster.png
 ---
 ```
 
-### Adding Images
+| Field     | Required | What it does on the site                                             |
+| --------- | -------- | -------------------------------------------------------------------- |
+| `slug`    | no       | URL: `/blog/<slug>`. Defaults to the filename (minus the date).       |
+| `title`   | **yes**  | Headline everywhere (hero, cards, browser tab).                       |
+| `authors` | no       | Key from `authors.yml` → display name in the post hero.               |
+| `tags`    | no       | **First tag becomes the category badge** on cards (e.g. `outsourcing` → "Outsourcing"). |
+| `image`   | no       | Path to the poster, relative to `blog/` (e.g. `./img/my-poster.png`). |
+| `description` | no   | Card/SEO excerpt. If omitted, the intro before `truncate` is used.    |
+| `date`    | no       | Overrides the filename date (`YYYY-MM-DD`).                           |
 
-Store images in `static/img/article-slug/` directory and reference them as:
-```markdown
-![Image Alt Text](/img/article-slug/image-name.png)
+### 4. Write the article
+
+```mdx
+The opening paragraph — make it count, it doubles as the card excerpt
+and search description.
+
+{/* truncate */}
+
+## First Section
+
+Everything above `truncate` is the teaser; everything below is the rest
+of the article.
+
+### A Sub-Section
 ```
 
-## 🏗️ Project Structure
+How the markdown maps to the site:
 
+- `##` (h2) → **Table of Contents entries** in the post sidebar
+- `###` (h3) → sub-entries that expand under their section as you scroll
+- Tables, bullet/numbered lists, `> blockquotes`, **bold**, links — all
+  styled automatically
+- Read time ("4 Minute Read") is computed from word count — nothing to set
+- Don't use `#` (h1) in the body — the title already renders as the h1
+
+### 5. Push
+
+```bash
+git add blog/
+git commit -m "post: my new post"
+git push
 ```
-ai-travel-blog/
-├── blog/                 # Blog posts and configuration
-│   ├── authors.yml       # Author information
-│   ├── tags.yml          # Tag definitions
-│   └── YYYY/             # Blog posts by year
-├── docs/                 # Documentation pages
-├── src/                  # Docusaurus source files
-├── static/               # Static assets (images, etc.)
-└── docusaurus.config.js  # Site configuration
-```
 
-## 🤝 Contributing
-
-We welcome contributions! Here's how you can help:
-
-1. **Write Articles**: Share your travel experiences and insights
-2. **Improve Content**: Suggest edits or additional information
-3. **Report Issues**: Found a bug or have a suggestion?
-4. **Photography**: Contribute high-quality travel photos
-
-### Content Guidelines
-
-- Focus on authentic, respectful cultural experiences
-- Include practical travel information
-- Use inclusive and responsible tourism language
-- Cite sources and give credit where due
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 🌟 Author
-
-**Michael Getu** - Travel Blogger & Cultural Explorer
-- Website: [Travel Plan AI](https://travelplan-ai.com)
-- Passionate about sharing Ethiopia's rich cultural heritage with the world
+That's it. The GitHub Action in `.github/workflows/deploy-site.yml` pings
+Vercel, the site rebuilds (~2 min), and the post is live with your poster.
 
 ---
 
-*Built with ❤️ using Docusaurus*
+## 👤 Adding yourself as an author
+
+Add an entry to `blog/authors.yml`:
+
+```yaml
+your-key:
+  name: Your Name
+  title: Your Role
+```
+
+Then use `authors: [your-key]` in your posts.
+
+---
+
+## 🔍 Previewing before you push
+
+Two options:
+
+- **Docusaurus preview (this repo):** `npm install` once, then `npm start`
+  — quick check that the markdown is valid and reads well.
+- **Exact site preview (site repo):** in `Zemenay-Revamped-2026`, run
+  `npm run import:blog` then `npm run dev` and open
+  `localhost:3000/blog` — renders your draft with the real site design,
+  poster included.
+
+---
+
+## ⚙️ How the automation works (one-time setup, already-configured list)
+
+1. **Site repo** (`Zemenay-Revamped-2026`): `prebuild` runs
+   `scripts/import-docusaurus-blog.mjs --if-configured`, which clones this
+   repo and imports `blog/` whenever the `BLOG_CONTENT_REPO` env var is set
+   on Vercel (`https://github.com/MichaelGetu-git/blog.git`).
+2. **This repo**: on every push that touches `blog/`, the
+   `deploy-site.yml` workflow POSTs to a Vercel Deploy Hook, triggering a
+   site rebuild. The hook URL lives in this repo's Actions secret
+   `VERCEL_DEPLOY_HOOK`.
+3. If this repo is ever unreachable during a build, the site falls back to
+   the last imported posts — deploys never break because of content.
+
+Import details worth knowing:
+
+- Poster referenced via `image:` is copied into the site and renamed to
+  `<slug>.png` automatically — the filename here doesn't have to match.
+- The importer sorts posts newest-first; the three newest appear in the
+  "Feature and Trending" section on `/blog`, and all posts appear under
+  "Popular Resources".
