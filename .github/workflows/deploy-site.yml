@@ -1,0 +1,32 @@
+# Rebuilds zemenaytech.com whenever blog content changes.
+#
+# The Zemenay site imports the posts in this repo's blog/ directory at build
+# time (see scripts/import-docusaurus-blog.mjs in the site repo). This
+# workflow pings a Vercel Deploy Hook after every push so a new post goes
+# live without touching the site repo.
+#
+# One-time setup:
+#   1. Vercel → Zemenay project → Settings → Git → Deploy Hooks →
+#      create a hook (name: "blog-content", branch: main) and copy its URL.
+#   2. GitHub → this repo → Settings → Secrets and variables → Actions →
+#      new repository secret named VERCEL_DEPLOY_HOOK with that URL.
+
+name: Deploy Zemenay site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'blog/**'
+
+jobs:
+  trigger-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Vercel deploy hook
+        run: |
+          if [ -z "${{ secrets.VERCEL_DEPLOY_HOOK }}" ]; then
+            echo "VERCEL_DEPLOY_HOOK secret is not set — see setup notes in this file."
+            exit 1
+          fi
+          curl -sf -X POST "${{ secrets.VERCEL_DEPLOY_HOOK }}"
